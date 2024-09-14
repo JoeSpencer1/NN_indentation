@@ -1,0 +1,57 @@
+reset
+
+create vertex 0 1 0
+create vertex 2, 1, 0
+create vertex 2 0.7047793491476405 0
+create vertex 0.06224899581242801, 0.010810472517789332 0 
+create vertex 0 0 0
+create vertex 0 0.13826 0
+create curve vertex 1 2
+create curve vertex 2 3
+create curve vertex 3 4
+create curve vertex 5 4 6
+create curve vertex 5 1
+create surface curve 1 2 3 4 5
+
+sideset 1 curve 1 # Indenter top
+sideset 2 curve 3 4 # Indenter bottom
+sideset 3 curve 5 # Indenter left
+
+surface 1 size 0.3
+create block 1
+block 1 add surface 1
+
+mesh surface 1 smooth
+refine curve 4 smooth
+block 1 element type quad4
+
+create vertex 0 0 0
+create vertex 2 0 0
+create vertex 2 -2 0 
+create vertex 0 -2 0 
+create curve vertex 12 13 
+create curve vertex 13 14
+create curve vertex 14 15
+create curve vertex 15 12
+create surface curve 6 7 8 9
+
+sideset 4 curve 6 # Specimen top
+sideset 5 curve 7 # Specimen right
+sideset 6 curve 8 # Specimen bottom
+sideset 7 curve 9 # Specimen left
+
+surface 2 size 0.4
+create block 2
+block 2 add surface 2
+#surface 2 scheme trimesh
+
+move volume 1 x 0 y 1 z 0
+mesh surface 2
+refine vertex 12 radius 0.5
+refine vertex 12 radius 0.35
+refine vertex 12 radius 0.2
+move volume 1 x 0 y -1 z 0
+block 2 element type quad4
+export genesis "~/GitHub/NN_indentation/moose/mesh/2D_rl1.e" dimension 3 overwrite
+
+quality surface 1

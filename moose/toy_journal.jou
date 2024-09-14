@@ -1,0 +1,37 @@
+reset
+
+# bottom = 1, right = 2, top = 3, left = 4
+
+create vertex 0 0 0
+create vertex 0 1 0
+create vertex 1 1 0
+create vertex 1 0 0
+
+create curve vertex 1 2
+create curve vertex 2 3
+create curve vertex 3 4
+create curve vertex 4 1
+
+create surface curve 1 2 3 4
+
+sideset 1 curve 1
+sideset 2 curve 2
+sideset 3 curve 3
+sideset 4 curve 4
+nodeset 5 vertex 1
+
+surface 1 size 1
+create block 1
+block 1 add surface 1
+
+mesh surface 1 smooth
+block 1 element type quad4
+
+sideset 1 label 1 # left
+sideset 2 label 2 # top
+sideset 3 label 3 # right
+sideset 4 label 4 # bottom
+nodeset 5 label 5 # corner
+
+
+export genesis "~/GitHub/NN_TiAlTa/moose/toy_mesh_l0.e" dimension 3 overwrite

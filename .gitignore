@@ -1,0 +1,8 @@
+.DS_Store
+data/.DS_Store
+.vscode
+.history
+*.e
+src/__pycache__
+moose/ind_2D_out_cp
+moose/ind_3D_out_cp
