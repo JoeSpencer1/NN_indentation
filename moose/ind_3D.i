@@ -3,12 +3,12 @@ K =  7.26 #7.26
 n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
-fname = mesh/3D_refl.e
+fname = mesh/3D_rq2.e
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
   volumetric_locking_correction = true
-  order = FIRST
+  order = SECOND
   family = LAGRANGE
 []
   
@@ -23,8 +23,8 @@ fname = mesh/3D_refl.e
   [push_down]
     type = PiecewiseLinear
     xy_data = '0  0
-         1   -${hm}
-         1.5  0'
+         1   -${hm}'
+        #  1.5  0'
   [] #Indenter displacement, μm
 []
   
@@ -36,7 +36,7 @@ fname = mesh/3D_refl.e
   [saved_z]
   []
   [effective_plastic_strain]
-    order = CONSTANT
+    order = SECOND
     family = MONOMIAL
   []
 []
@@ -154,7 +154,7 @@ fname = mesh/3D_refl.e
     type = AverageElementSize
     outputs = 'console'
     execute_on = 'timestep_end'
-    block = 1
+    block = '1 2'
   []
 []
 
@@ -180,7 +180,7 @@ fname = mesh/3D_refl.e
   nl_max_its = 50
   dt = 0.01
   dtmin = 0.00001
-  end_time = 1.5
+  end_time = 1.0#5
   nl_rel_tol = 1e-6
   nl_abs_tol = 1e-10
   automatic_scaling = true

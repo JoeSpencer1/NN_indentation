@@ -102,15 +102,15 @@ import pandas as pd
 # plt.show()
 
 # New MOOSE convergence study
-# Bqx = [0, 0, 0]
-# Bqy = [0, 0, 0]
-# Blx = [0, 0, 0]
-# Bly = [0, 0, 0]
+Bqx = [0.8012252, 0.3896965, 0.1769296]
+Bqy = [0.016323392, 0.007350307, 0.001790808]
+Blx = [0.8012252, 0.3896965, 0.1769296]
+Bly = [0.013934948, 0.005813441, 0.001198343]
 fx = [0.01, 1.5]
-C70lx = [0.281737, 0.1534312, 0.0817]
-C70ly = [0.049237246872649965, 0.01989063690102448, 0.005899134270702621]
-# C70qx = [0, 0, 0]
-# C70qy = [0, 0, 0]
+C70lx = [0.3158137, 0.1769296, 0.09082717]
+C70ly = [0.005870158, 0.001304296, 0.000343721]
+C70qx = [0.3158137, 0.1769296, 0.09082717]
+C70qy = [0.000260276, 9.81175E-05, 2.58569E-05]
 
 def equation(x, y, eqx):
     l = len(x) - 1
@@ -124,39 +124,89 @@ def equation(x, y, eqx):
     for i in range(2):
         eqy[i] = C * eqx[i] ** p
     return eqy
-# Bfq = equation(Bqx, Bqy, fx)
-# Bfl = equation(Blx, Bly, fx)
+Bfq = equation(Bqx, Bqy, fx)
+Bfl = equation(Blx, Bly, fx)
 f70l = equation(C70lx, C70ly, fx)
-# f70q = equation(C70qx, C70qy, fx)
+f70q = equation(C70qx, C70qy, fx)
 
 fig, ax = plt.subplots()
-# ax.scatter(Blx, Bly, color='blue', marker='s', facecolor='none', label='Linear 3D: $||e||_{L_{2}}=0.0031h^{1.71}$')
-# ax.scatter(Bqx, Bqy, color='red', marker='^', facecolor='none', label='Qadratic 3D: $||e||_{L_{2}}=0.0177h^{2.19}$')
-ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=0.453h^{1.714}$')
-# ax.scatter(C70qx, C70qy, color='violet', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=0.0197h^{1.95}$')
-# ax.plot(fx, Bfl, linestyle="--", color='blue')
-# ax.plot(fx, Bfq, linestyle="--", color='red')
-ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.scatter(Blx, Bly, color='blue', marker='s', facecolor='none', label='Linear 3D: $||e||_{L_{2}}=0.024h^{1.46}$')
+ax.scatter(Bqx, Bqy, color='red', marker='^', facecolor='none', label='Qadratic 3D: $||e||_{L_{2}}=0.022h^{1.62}$')
+# ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=0.076h^{2.0}$')
+# ax.scatter(C70qx, C70qy, color='violet', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=0.002h^{1.85}$')
+ax.plot(fx, Bfl, linestyle="--", color='blue')
+ax.plot(fx, Bfq, linestyle="--", color='red')
+# ax.plot(fx, f70l, linestyle="--", color='gray')
 # ax.plot(fx, f70q, linestyle="--", color='violet')
 ax.plot()
 ax.set_xlabel('Element length (μm)')
 ax.set_xscale('log')
-ax.set_xlim([0.04, 0.8])
+ax.set_xlim([0.04, 1])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([1e-4, 1e-1])
+ax.set_ylim([1e-6, 1e-1])
 ax.grid(False)
 leg = ax.legend(loc='lower right', frameon=False)
 leg.set_title('Element order')
 plt.savefig('/Users/joe/Desktop/linqd2D.pdf', dpi=800, bbox_inches="tight")
 plt.show()
 
+# New MOOSE convergence study
+Bqx = [0.8012252, 0.3896965, 0.1769296]
+Bqy = [0.016323392, 0.007350307, 0.001790808]
+Blx = [0.8012252, 0.3896965, 0.1769296]
+Bly = [0.013934948, 0.005813441, 0.001198343]
+fx = [0.01, 1.5]
+C70lx = [0.3158137, 0.1769296, 0.09082717]
+C70ly = [0.005870158, 0.001304296, 0.000343721]
+C70qx = [0.3158137, 0.1769296, 0.09082717]
+C70qy = [0.000260276, 9.81175E-05, 2.58569E-05]
+
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(3):
+        C += (1/3)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+Bfq = equation(Bqx, Bqy, fx)
+Bfl = equation(Blx, Bly, fx)
+f70l = equation(C70lx, C70ly, fx)
+f70q = equation(C70qx, C70qy, fx)
+
+fig, ax = plt.subplots()
+# ax.scatter(Blx, Bly, color='blue', marker='s', facecolor='none', label='Linear 3D: $||e||_{L_{2}}=0.024h^{1.46}$')
+# ax.scatter(Bqx, Bqy, color='red', marker='^', facecolor='none', label='Qadratic 3D: $||e||_{L_{2}}=0.022h^{1.62}$')
+ax.scatter(C70lx, C70ly, color='blue', marker='s', label='Linear 2D: $||e||_{L_{2}}=0.076h^{2.0}$')
+ax.scatter(C70qx, C70qy, color='red', marker='^', label='Qadratic 2D: $||e||_{L_{2}}=0.002h^{1.85}$')
+# ax.plot(fx, Bfl, linestyle="--", color='blue')
+# ax.plot(fx, Bfq, linestyle="--", color='red')
+ax.plot(fx, f70l, linestyle="--", color='blue')
+ax.plot(fx, f70q, linestyle="--", color='red')
+ax.plot()
+ax.set_xlabel('Element length (μm)')
+ax.set_xscale('log')
+ax.set_xlim([0.04, 1])
+ax.set_ylabel('L$_{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([1e-6, 1e-1])
+ax.grid(False)
+leg = ax.legend(loc='lower right', frameon=False)
+leg.set_title('Element order')
+plt.savefig('/Users/joe/Desktop/linqd2Da.pdf', dpi=800, bbox_inches="tight")
+plt.show()
+
 # Toy problem convergence study
 fx = [0.01, 1.5]
-C70lx = [1, 0.5, 0.25]
-C70ly = [0.404420928, 0.20564558, 0.10859519]
+C70lx = [1, 0.5, 0.25, 0.125]
+C70ly = [1, 0.212798001, 0.053075239, 0.01326881]
 C70qx = [1, 0.5, 0.25]
-C70qy = [0.566705153, 0.097948254, 0.026901775]
+C70qy = [0.658728443, 0.113868503, 0.028467128]
 
 def equation(x, y, eqx):
     l = len(x) - 1
@@ -174,8 +224,8 @@ f70l = equation(C70lx, C70ly, fx)
 f70q = equation(C70qx, C70qy, fx)
 
 fig, ax = plt.subplots()
-ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=0.001h^{0.95}$')
-ax.scatter(C70qx, C70qy, color='violet', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=0.0004h^{2.20}$')
+ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=0.857h^{1.96}$')
+ax.scatter(C70qx, C70qy, color='violet', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=0.659h^{2.27}$')
 ax.plot(fx, f70l, linestyle="--", color='gray')
 ax.plot(fx, f70q, linestyle="--", color='violet')
 ax.plot()
@@ -184,19 +234,19 @@ ax.set_xscale('log')
 ax.set_xlim([0.1, 1.5])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([1e-4, 7e-1])
+ax.set_ylim([1e-2, 1.1])
 ax.grid(False)
 leg = ax.legend(loc='lower right', frameon=False)
 leg.set_title('Element order')
-ax.set_title('Convergence study with unevenly distributed loading (sinusoidal)')
+ax.set_title('Convergence study with sinusoidal loading along a beam')
 plt.savefig('/Users/joe/Desktop/convergence.pdf', dpi=800, bbox_inches="tight")
 plt.show()
 # Toy problem convergence study
 fx = [0.01, 1.5]
 C70lx = [1, 0.5, 0.25]
-C70ly = [0.372148957, 0.145814845, 0.039428335]
+C70ly = [1.76583E-10, 1.35309E-12, 3.3825E-13]
 C70qx = [1, 0.5, 0.25]
-C70qy = [0.024558453, 0.015362063, 0.004153902]
+C70qy = [3.01278E-12, 2.61673E-12, 6.54171E-13]
 
 def equation(x, y, eqx):
     l = len(x) - 1
@@ -214,8 +264,8 @@ f70l = equation(C70lx, C70ly, fx)
 f70q = equation(C70qx, C70qy, fx)
 
 fig, ax = plt.subplots()
-ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=0.372h^{1.62}$')
-ax.scatter(C70qx, C70qy, color='violet', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=0.024h^{1.28}$')
+ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D$')
+ax.scatter(C70qx, C70qy, color='violet', marker='d', label='Qadratic 2D$')
 ax.plot(fx, f70l, linestyle="--", color='gray')
 ax.plot(fx, f70q, linestyle="--", color='violet')
 ax.plot()
@@ -224,11 +274,11 @@ ax.set_xscale('log')
 ax.set_xlim([0.1, 1.5])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([1e-4, 5e-1])
+ax.set_ylim([2e-13, 2e-10])
 ax.grid(False)
-leg = ax.legend(loc='lower right', frameon=False)
+leg = ax.legend(loc='upper left', frameon=False)
 leg.set_title('Element order')
-ax.set_title('Convergence study with uniform loading')
+ax.set_title('Convergence study with uniform compression')
 plt.savefig('/Users/joe/Desktop/convergence1.pdf', dpi=800, bbox_inches="tight")
 plt.show()
 

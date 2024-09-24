@@ -7,7 +7,7 @@ create radialmesh numZ 1 zblock 1 0.4 first size 0.1 last size 0.1\
         rblock 3 2 first size 0.25 last size 0.25 \
     numA 1 span 60 ablock 1 interval 4 # z=0 side of block
 rotate volume 1 2 angle 90 about x include_merged
-create radialmesh numZ 1 zblock 1 1.5 first size 0.375 last size 0.375\
+create radialmesh numZ 1 zblock 1 1.6 first size 0.4 last size 0.4\
     numR 3 trisection rblock 1 0.5 interval 4 \
         rblock 2 1.5 first size 0.25 last size 0.25 \
         rblock 3 2 first size 0.25 last size 0.25 \
@@ -35,6 +35,7 @@ move volume 8 x 0 y 0.5 z 0
 move volume 5 x 0 y -0.00853189048753 z 0
 webcut body 5 tool volume 8
 delete volume 5 8
+#move volume 9 x 0 y 0.05 z 0
 
 sideset 1 surface 13 19 # Specmimen bottom
 sideset 2 surface 2 7 12 17 # Specimen z=0 0˚
@@ -45,7 +46,7 @@ sideset 6 surface 61 # Indenter z=0 0˚
 sideset 7 surface 59 # Indenter 60˚
 sideset 8 surface 60 # Indenter top
 
-volume 9 size 0.3
+volume 9 size 0.2
 volume 9 scheme auto
 mesh volume 9
 

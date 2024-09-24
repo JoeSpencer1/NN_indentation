@@ -4,12 +4,12 @@ create vertex 0 1 0
 create vertex 2, 1, 0
 create vertex 2 0.7047793491476405 0
 create vertex 0.06224899581242801, 0.010810472517789332 0 
-create vertex 0 0 0
+create vertex 0 0.010810472517789332 0
 create vertex 0 0.13826 0
 create curve vertex 1 2
 create curve vertex 2 3
 create curve vertex 3 4
-create curve vertex 5 4 6
+create curve vertex 4 5
 create curve vertex 5 1
 create surface curve 1 2 3 4 5
 
@@ -17,7 +17,7 @@ sideset 1 curve 1 # Indenter top
 sideset 2 curve 3 4 # Indenter bottom
 sideset 3 curve 5 # Indenter left
 
-surface 1 size 0.3
+surface 1 size 0.075
 create block 1
 block 1 add surface 1
 
@@ -40,7 +40,7 @@ sideset 5 curve 7 # Specimen right
 sideset 6 curve 8 # Specimen bottom
 sideset 7 curve 9 # Specimen left
 
-surface 2 size 0.1
+surface 2 size 0.025
 create block 2
 block 2 add surface 2
 

@@ -104,8 +104,8 @@ def model_swa(C, dPdh, nu, Er, hm, hr, theta=70.3, nu_i=0.0691, E_i=1143, typ='b
 
 #print(model_old(204.8761345, 188141.7926, 0.25, 151, 0.220941158, 0.025171))
 #print(model_new(204.8761345, 0.25, 151, 0.220941158))
-#filename = '../data/TI33_25.csv'
-filename = '../data/B3090.csv'
+filename = '../data/TI33_25.csv'
+# filename = '../data/B3090.csv'
 df = pd.read_csv(filename)
 print('New')
 for i in range(len(df)):

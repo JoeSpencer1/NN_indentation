@@ -6,3 +6,4 @@ data/.DS_Store
 src/__pycache__
 moose/ind_2D_out_cp
 moose/ind_3D_out_cp
+moose/.jitcache/
