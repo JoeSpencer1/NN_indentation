@@ -117,6 +117,7 @@ def validation_one(yname, testname, trainname, n_hi, n_vd=0.2, lay=2, wid=32):
     print(yname, n_hi, np.mean(mape), np.std(mape))
     with open('output.txt', 'a') as f:
         f.write('validation_one ' + yname + ' ' + f'{np.mean(mape):.2f}' + ' ' + f'{np.std(mape):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainname) + ' ' + str(n_hi) + ' ' + str(n_vd) + ' ' + str(lay) + ' ' + str(wid) + '\n')
+    # return 'validation_one ' + yname + ' ' + f'{np.mean(mape):.2f}' + ' ' + f'{np.std(mape):.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainname) + ' ' + str(n_hi) + ' ' + str(n_vd) + ' ' + str(lay) + ' ' + str(wid) + '\n'
 
 def validation_two(yname, testname, trainhigh, n_hi, trainlow, n_lo, v_lo=0, n_vd=0.2, lay=2, wid=128):
     datalow = FileData(trainlow, yname)
@@ -270,8 +271,6 @@ def validation_three(yname, testname, trainexp, n_exp, trainhigh, n_hi, trainlow
 
     with open('output.txt', 'a') as f:
         f.write('validation_three ' + yname + ' ' + f'{np.mean(ape, axis=0)[0]:.2f}' + ' ' + f'{np.std(ape, axis=0)[0]:.2f}' + ' ' + t2s(testname) + ' ' + t2s(trainexp) + ' ' + str(n_exp) + ' ' + t2s(trainhigh) + ' ' + str(n_hi) + ' ' + t2s(trainlow) + ' ' + str(n_lo) + ' ' + typ + ' ' + str(n_vd) + ' ' + str(v_hi) + ' ' + str(v_lo) + ' ' + str(lay) + ' ' + str(wid) + '\n')
-    print('Saved to ', yname, '.dat.')
-    np.savetxt(yname + '.dat', np.hstack(y).T)  
 
 def find_properties(yname, expname, train_hi, train_lo, lay=2, wid=128):
     datalow = FileData(train_lo, yname)

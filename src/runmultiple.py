@@ -22,14 +22,11 @@ def run_processes(arguments):
         f.write('\n')
 
 if __name__ == '__main__':
-    run_processes(np.array([
-        "validation_two('sy', 'TI33_25', 'Lu_Berkovich', 12, 'Lu_conical', 100, n_vd=0)",
-        "validation_three('sy', 'TI33_25', ('Al6061', 'Al7075'), 11, 'Lu_Berkovich', 14, 'Lu_conical', 100, typ='hi', n_vd=0)",
-        ]))
-    run_processes(np.array([
-        "validation_two('Er', 'TI33_25', 'Lu_Berkovich', 14, 'Lu_conical', 100, n_vd=0)",
-        "validation_three('Er', 'TI33_25', ('Al6061', 'Al7075'), 11, 'Lu_Berkovich', 14, 'Lu_conical', 100, typ='hi', n_vd=0)",
-    ]))
+    run_processes([
+        "validation_one('sy', 'TI33_25', 'TI33_25', 10)",
+        "validation_one('sy', 'TI33_25', 'TI33_25', 5)",
+        "validation_one('sy', 'TI33_25', 'TI33_25', 2)"
+    ])
     # run_processes(np.array([
     #     "validation_three('sy', 'TI33_25', 'TI33_25', 0, '3D_linear', 0, '2D_70_linear', 0, typ='lo')",
     #     "validation_three('sy', 'TI33_25', 'TI33_25', 1, '3D_linear', 1, '2D_70_linear', 1, typ='lo')",

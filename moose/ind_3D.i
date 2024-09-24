@@ -3,16 +3,13 @@ K =  7.26 #7.26
 n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
-<<<<<<< HEAD
-fname = mesh/3D_rq2.e
-=======
-fname = mesh/3D_refq.e
->>>>>>> origin/main
+
+fname = mesh/3D_rl4.e
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
   volumetric_locking_correction = true
-  order = SECOND
+  order = FIRST
   family = LAGRANGE
 []
   
@@ -40,7 +37,7 @@ fname = mesh/3D_refq.e
   [saved_z]
   []
   [effective_plastic_strain]
-    order = SECOND
+    order = FIRST
     family = MONOMIAL
   []
 []

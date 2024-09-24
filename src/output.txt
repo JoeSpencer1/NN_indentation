@@ -1,2 +1,8 @@
 
 
+
+
+validation_one sy 128.12 87.21 TI33_25 TI33_25 2 5 2 32
+validation_one sy 7.68 5.62 TI33_25 TI33_25 10 5 2 32
+validation_one sy 29.25 17.47 TI33_25 TI33_25 5 5 2 32
+

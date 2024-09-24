@@ -1,7 +1,7 @@
 # Multi-fidelity neural network
 
 ## Description
-My version of the neural network published by Lu et al., used to find the impact of temperature.
+My version of the neural network published by Lu et al., used to model indentation of 33% TiAlTa.
 Lu et al.'s paper can be found [here](https://www.pnas.org/content/early/2020/03/13/1922210117), and the code they used can be found [here](https://github.com/lululxvi/deep-learning-for-indentation).
 
 ## Data
@@ -16,7 +16,7 @@ the main project file, nn.py.
 - Figures used in presentations were created using figures.py.
 - Multiple functions can be performed in parallel with runmultiple.py to speed up processing time.
 - Fitting functions were used in model.py. The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
-- MOOSE was configured using a different derivative size.
+- MOOSE was configured using a different derivative size. The input files and mesh generation files are located in the [moose](moose) folder.
 ```
 ./configure --with-derivative-size=300
 ```
