@@ -10,7 +10,7 @@ current_refine = toy_fish_q2.e
 
 most_refined = toy_fish_q7.e
 second_refined = toy_fish_q6.e
-ref_refine = toy_fish_q7.e # ${current_refine}
+ref_refine = ${current_refine} # toy_fish_q7.e
 
 
 [Mesh]
@@ -164,7 +164,7 @@ ref_refine = toy_fish_q7.e # ${current_refine}
 []
 
 # [VectorPostprocessors]
-#   [convergence_disp]
+#   [convergence_disp] # ElementMaterialsSampler is not in local moose copy.
 #     type = ElementMaterialSampler
 #     material = 'toperror'
 #     block = '1'
