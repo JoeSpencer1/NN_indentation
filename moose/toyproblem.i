@@ -1,10 +1,22 @@
+E = 200e9
+nu = 0#0.3
+c = 1e8
+l = 0.5
+A = 1
 
 [Mesh]
   # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [mesh]
     type = FileMeshGenerator
-    file = 'toy_mesh_q3.e'
+    file = 'toy_mesh_q7.e'
   []
+  # [refine]
+  #   type = RefineBlockGenerator
+  #   input = mesh
+  #   block = 1 
+  #   refinement_type = uniform
+  #   refinement = 1  
+  # # []
 []
 
 [GlobalParams]
@@ -50,18 +62,18 @@
   []
 []
 
-[VectorPostprocessors]
-  [y_disp]
-    type = NodalValueSampler
-    variable = disp_y
-    sort_by = x
-  []
-[]
+# [VectorPostprocessors]
+#   [y_disp]
+#     type = NodalValueSampler
+#     variable = disp_y
+#     sort_by = x
+#   []
+# []
 
 [Functions]
   [body_force]
     type = ParsedFunction
-    value = '4e8*y'
+    value = '${c}*y*t'
   []
 []
 
@@ -72,6 +84,7 @@
   [BodyForce]
     type = ADBodyForce
     variable = disp_y
+    block = 1
     function = body_force
   []
 []
@@ -86,48 +99,35 @@
   [bottom_x]
     type = DirichletBC
     variable = disp_x
-    # Use boundary 5 for pin, boundary 4 for fixed
+    # Use boundary 5 for pin, boundary 4 for glued
     boundary = 5
     value = 0
   []
-  [top_y]
+  # [top_y] # Constant axial load case
+  #   type = FunctionNeumannBC
+  #   variable = disp_y
+  #   boundary = 2
+  #   function = '-1e8*t'
+  # []
+  # [top_y] # Varied axial load case
+  #   type = FunctionNeumannBC
+  #   variable = disp_y
+  #   boundary = 2
+  #   function = '-2e8*t*x'
+  # []
+  [right_y] # Fish book problem. c=1e8, l=0.5, A=1
     type = FunctionNeumannBC
     variable = disp_y
     boundary = 2
-    function = '-1e8*t'
+    function = '-${c}*((${l}^2)/${A})*t'
   []
-  # [left_x]
-  #   type = DirichletBC
-  #   variable = disp_x
-  #   boundary = 1
-  #   value = 0
-  # []
-  # [bottom_y]
-  #   type = DirichletBC
-  #   variable = disp_y
-  #   # Use boundary 5 for pin, boundary 4 for fixed
-  #   boundary = 1
-  #   value = 0
-  # []
-  # [top_y]
-  #   type = FunctionDirichletBC
-  #   variable = disp_y
-  #   boundary = 2
-  #   function = '-0.1*t*sin(pi*x)'
-  # []
-  # [right_y]
-  #   type = FunctionNeumannBC
-  #   variable = disp_y
-  #   boundary = 3
-  #   function = '1e8*y*t'
-  # []
 []
 
 [Materials]
-  [elasticity]
+  [elasticity] # Near properties of structural steel
     type = ComputeIsotropicElasticityTensor
-    youngs_modulus = 1e9
-    poissons_ratio = 0.3
+    youngs_modulus = ${E}
+    poissons_ratio = ${nu}
   []
   [strain]
     type = ComputeSmallStrain
@@ -140,7 +140,7 @@
 
 [Executioner]
   type = Transient
-  dt = 0.1
+  dt = 1.0
   end_time = 1.0
   solve_type = PJFNK
   petsc_options_iname = '-pc_type -pc_hypre_type'

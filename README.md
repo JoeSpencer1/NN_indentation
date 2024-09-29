@@ -16,11 +16,11 @@ the main project file, nn.py.
 - Figures used in presentations were created using figures.py.
 - Multiple functions can be performed in parallel with runmultiple.py to speed up processing time.
 - Fitting functions were used in model.py. The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
+
+## Finite element method simulations
+- Finite element simulations were 
 - MOOSE was configured using a different derivative size. The input files and mesh generation files are located in the [moose](moose) folder.
-```
-./configure --with-derivative-size=300
-```
-- Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder using the commands,
+- Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder using 4 parallel threads with the commands,
 ```
 mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
 ```
@@ -29,7 +29,10 @@ Besides conventional Python packages, the following package by Lu Lu is required
 - [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` is used, with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
 - [Keras](https://keras.io/) `v2.15.0` is used. DeepXDE will not work with newer versions of Keras like v3.
 - [TensorFlow](https://www.tensorflow.org/) `v2.15.0`, with `tensorflow-probability==0.23.0` (see this DeepXDE [Git issue](https://github.com/lululxvi/deepxde/issues/1682)).
-
+-[MOOSE](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/) was installed in a separate environment using the program's documented installation instructions. The derivative size was also set to 300
+```
+./configure --with-derivative-size=300
+```
 
 ## Questions
 For help using this code, please see the issues section or open a new issue.

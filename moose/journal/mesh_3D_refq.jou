@@ -21,7 +21,8 @@ create block 1
 block 1 add volume 1 2 3 4
 block 1 element type hex27 
 
-create pyramid height 1.003618893150114627 sides 3 radius 4.358035829057745 top 0
+#create pyramid height 1.003618893150114627 sides 3 radius 4.358035829057745 top 0
+create pyramid height 0.953618893150114627 sides 3 radius 4.158035829057745 top 0
 rotate volume 5 angle 90 about x 
 move volume 5 x 0 y -0.003618893150114627 z 0
 move volume 5 x 0 y 0.5 z 0

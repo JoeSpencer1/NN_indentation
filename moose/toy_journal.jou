@@ -20,7 +20,8 @@ sideset 3 curve 3
 sideset 4 curve 4
 nodeset 5 vertex 1
 
-surface 1 size 1
+# Sizes: 1, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625, 0.001953125
+surface 1 size 0.0078125
 create block 1
 block 1 add surface 1
 
@@ -33,5 +34,4 @@ sideset 3 label 3 # right
 sideset 4 label 4 # bottom
 nodeset 5 label 5 # corner
 
-
-export genesis "~/GitHub/NN_TiAlTa/moose/toy_mesh_l0.e" dimension 3 overwrite
+export genesis "~/GitHub/NN_indentation/moose/toy_mesh_l7.e" dimension 3 overwrite

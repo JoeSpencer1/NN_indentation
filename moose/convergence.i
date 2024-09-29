@@ -1,29 +1,26 @@
-# 3D case
-# h_1 = 0.1769296 # linear
-# h_1 = 0.1923527 # quad
-# h_2 = 0.3896965
-# # 2D case
-# h_1 = 9.082717e-02
-# h_2 = 0.1769296
-h_1 = 0.25
-h_2 = 0.5
-# h_1 = 4.622396e-02
-# h_2 = 0.09082717#0.1769296
+h_1 = 0.001953125
+h_2 = 0.00390625
 
-current_refine = outputs/convergence/3D_rl2.e
-most_refined = outputs/convergence/3D_refl.e
-second_refined = outputs/convergence/3D_rl2.e#3D_rq2.e
+E = 200e9
+c = 1e8
+l = 0.5
+A = 1
+
+current_refine = toy_fish_q2.e
+
+most_refined = toy_fish_q7.e
+second_refined = toy_fish_q6.e
+ref_refine = toy_fish_q7.e # ${current_refine}
 
 
 [Mesh]
-  # This is the input or ou
-  tput mesh for whichever refinement level you want to integrate
-  file = ${current_refine} #${most_refined}
-  block = '1 2'
+  # This is the input or output mesh for whichever refinement level you want to integrate
+  file = ${ref_refine}
+  block = 1#'1 2'
 []
 
 [GlobalParams]
-  order = FIRST
+  order = SECOND
   family = LAGRANGE
 []
 
@@ -93,6 +90,12 @@ second_refined = outputs/convergence/3D_rl2.e#3D_rq2.e
     solution = solution_n
     from_variable = 'disp_y'
   []
+
+  [exact] # For use in calculating the exact solution for the toy problem
+    # c=1e8, l=0.5, A=1, E=200e9
+    type = ParsedFunction
+    expression = '(${c}/(${E}*${A}))*(-(y^3)/6+y*${l}^2)'
+  []
 []
 
 [UserObjects]
@@ -135,12 +138,18 @@ second_refined = outputs/convergence/3D_rl2.e#3D_rq2.e
   [richardson_top]
     type = ElementIntegralMaterialProperty
     mat_prop = toperror
-    block = '1 2'
+    block = 1#'1 2'
   []
   [richardson_bottom]
     type = ElementIntegralMaterialProperty
     mat_prop = bottomerror
-    block = '1 2'
+    block = 1#'1 2'
+  []
+
+  [error]
+    type = ElementL2Error
+    variable = disp_y_n
+    function = exact
   []
 []
 
@@ -163,7 +172,7 @@ second_refined = outputs/convergence/3D_rl2.e#3D_rq2.e
   #they don't match.
   start_time = 0.0
   end_time = 1.0
-  dt = 0.01
+  dt = 1.0#0.01
 []
 
 [Outputs]
