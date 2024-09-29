@@ -8,7 +8,7 @@ A = 1
   # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [mesh]
     type = FileMeshGenerator
-    file = 'toy_mesh_q7.e'
+    file = 'toy_mesh_q0.e'
   []
   # [refine]
   #   type = RefineBlockGenerator

@@ -135,15 +135,25 @@ ref_refine = toy_fish_q7.e # ${current_refine}
 #     variable = disp_y_n
 #     function = function_1
 #   []
-  [richardson_top]
+  [rich_top]
     type = ElementIntegralMaterialProperty
     mat_prop = toperror
     block = 1#'1 2'
   []
-  [richardson_bottom]
+  [rich_bottom]
     type = ElementIntegralMaterialProperty
     mat_prop = bottomerror
     block = 1#'1 2'
+  []
+  [rich_normal]
+    type = ParsedPostprocessor
+    function = 'sqrt(rich_top)'
+    pp_names = 'rich_top rich_bottom'
+  []
+  [rich_error]
+    type = ParsedPostprocessor
+    function = 'sqrt(rich_top / rich_bottom)'
+    pp_names = 'rich_top rich_bottom'
   []
 
   [error]
@@ -154,6 +164,11 @@ ref_refine = toy_fish_q7.e # ${current_refine}
 []
 
 # [VectorPostprocessors]
+#   [convergence_disp]
+#     type = ElementMaterialSampler
+#     material = 'toperror'
+#     block = '1'
+#   []
 #   [convergence_disp]
 #     type = PointValueSampler
 #     use_interpolated_state = true
