@@ -4,7 +4,8 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = mesh/3D_refl.e
+fname = mesh/3D_ref0.e
+ref = 3
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
@@ -17,6 +18,12 @@ fname = mesh/3D_refl.e
   [initial]
     type = FileMeshGenerator
     file = ${fname}
+  []
+  [refine]
+    type = RefineBlockGenerator
+    input = initial
+    block = '1 2'
+    refinement = '${ref} ${ref}'
   []
 []
   
