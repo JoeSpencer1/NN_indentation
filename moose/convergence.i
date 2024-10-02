@@ -2,15 +2,15 @@ h_1 = 0.001953125
 h_2 = 0.00390625
 
 E = 200e9
-c = 1e8
+c = 1e9
 l = 0.5
 A = 1
 
-current_refine = toy_fish_q2.e
+current_refine = outputs/3D_rl1.e #toy_fish_q1.e
 
-most_refined = toy_fish_q7.e
-second_refined = toy_fish_q6.e
-ref_refine = ${current_refine} # toy_fish_q7.e
+most_refined = outputs/3D_rl3.e #toy_fish_q7.e
+second_refined = outputs/3D_rl2.e #toy_fish_q6.e
+ref_refine = outputs/3D_refl.e #toy_fish_q7.e
 
 
 [Mesh]
@@ -20,7 +20,7 @@ ref_refine = ${current_refine} # toy_fish_q7.e
 []
 
 [GlobalParams]
-  order = SECOND
+  order = FIRST
   family = LAGRANGE
 []
 
@@ -147,12 +147,12 @@ ref_refine = ${current_refine} # toy_fish_q7.e
   []
   [rich_normal]
     type = ParsedPostprocessor
-    function = 'sqrt(rich_top)'
+    function = 'sqrt(rich_top/rich_bottom)'
     pp_names = 'rich_top rich_bottom'
   []
   [rich_error]
     type = ParsedPostprocessor
-    function = 'sqrt(rich_top / rich_bottom)'
+    function = 'sqrt(rich_top)'
     pp_names = 'rich_top rich_bottom'
   []
 
@@ -163,23 +163,20 @@ ref_refine = ${current_refine} # toy_fish_q7.e
   []
 []
 
-# [VectorPostprocessors]
+[VectorPostprocessors]
 #   [convergence_disp] # ElementMaterialsSampler is not in local moose copy.
 #     type = ElementMaterialSampler
 #     material = 'toperror'
 #     block = '1'
 #   []
-#   [convergence_disp]
-#     type = PointValueSampler
-#     use_interpolated_state = true
-#     variable = disp_y_n
-#     points = '0.5	0.5	0
-#             0.5	0.625	0
-#             0.625	0.625	0
-#             0.625	0.5	0'
-#     sort_by = x
-#   []
-# []
+  # [convergence_disp]
+  #   type = PointValueSampler
+  #   use_interpolated_state = true
+  #   variable = disp_y_n
+  #   points = '0.25	0.25	0'
+  #   sort_by = x
+  # []
+[]
 
 [Executioner]
   type = Transient
@@ -187,7 +184,7 @@ ref_refine = ${current_refine} # toy_fish_q7.e
   #they don't match.
   start_time = 0.0
   end_time = 1.0
-  dt = 1.0#0.01
+  dt = 1.0
 []
 
 [Outputs]

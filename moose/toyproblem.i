@@ -1,6 +1,6 @@
 E = 200e9
 nu = 0#0.3
-c = 1e8
+c = 1e9
 l = 0.5
 A = 1
 
@@ -16,7 +16,7 @@ A = 1
   #   block = 1 
   #   refinement_type = uniform
   #   refinement = 1  
-  # # []
+  # []
 []
 
 [GlobalParams]
@@ -60,32 +60,44 @@ A = 1
     variable = stress_yy
     boundary = 4
   []
+  [error]
+    type = ElementL2Error
+    variable = disp_y
+    function = exact
+  []
 []
 
-# [VectorPostprocessors]
-#   [y_disp]
-#     type = NodalValueSampler
-#     variable = disp_y
-#     sort_by = x
-#   []
-# []
+[VectorPostprocessors]
+  [y_disp]
+    type = NodalValueSampler
+    variable = disp_y
+    sort_by = y
+  []
+[]
 
 [Functions]
   [body_force]
     type = ParsedFunction
     value = '${c}*y*t'
   []
+  [exact] # For use in calculating the exact solution for the toy problem
+    # c=1e8, l=0.5, A=1, E=200e9
+    type = ParsedFunction
+    expression = '(${c}/(${E}*${A}))*(-(y^3)/6+y*${l}^2)'
+  []
 []
 
 [Kernels]
   [TensorMechanics]
     displacements = 'disp_x disp_y'
+    use_displaced_mesh = true
   []
   [BodyForce]
     type = ADBodyForce
     variable = disp_y
     block = 1
     function = body_force
+    use_displaced_mesh = true
   []
 []
 
@@ -109,13 +121,13 @@ A = 1
   #   boundary = 2
   #   function = '-1e8*t'
   # []
-  # [top_y] # Varied axial load case
+  # [top_y] # Linearly varied axial load case
   #   type = FunctionNeumannBC
   #   variable = disp_y
   #   boundary = 2
   #   function = '-2e8*t*x'
   # []
-  [right_y] # Fish book problem. c=1e8, l=0.5, A=1
+  [top_y] # Fish book problem. c=1e8, l=0.5, A=1
     type = FunctionNeumannBC
     variable = disp_y
     boundary = 2

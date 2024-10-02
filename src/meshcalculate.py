@@ -5,7 +5,7 @@ ac = np.arctan(np.sqrt(3*np.sqrt(3)*np.tan(ab*np.pi/180)**2/np.pi))*180/np.pi #h
 #ac = 70.32 Is inaccurate.
 r = 0.13826
 h = 1
-d = 2
+d = 1.6#2
 
 ab *= np.pi/180
 ac *= np.pi/180

@@ -5,7 +5,9 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 # For coarse meshes, you may need to decrease contact penalty to 1e3 
-fname = 2D_refq.e
+fname = mesh/2D_rq0.e
+ref = 4
+
 
 [GlobalParams]
   displacements = 'disp_x disp_y'
@@ -19,6 +21,12 @@ fname = 2D_refq.e
   [initial]
     type = FileMeshGenerator
     file = ${fname}
+  []
+  [refine]
+    type = RefineBlockGenerator
+    input = initial
+    block = '1 2'
+    refinement = '${ref} ${ref}'
   []
 []
   
@@ -187,6 +195,7 @@ fname = 2D_refq.e
     type = Console
     max_rows = 5
   []
+  # set file_base to choose what it's named
 []
   
 [Preconditioning]

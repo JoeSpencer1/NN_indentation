@@ -55,7 +55,7 @@ def model_dao(C, dPdh, nu, Er, hm, hr, nu_i=0.0691, E_i=1143):
         sigma_y = sigma_33
     return sigma_y/1e9, n
 
-def model_swa(C, dPdh, nu, Er, hm, hr, theta=70.3, nu_i=0.0691, E_i=1143, typ='b'):
+def model_cho(C, dPdh, nu, Er, hm, hr, theta=70.3, nu_i=0.0691, E_i=1143, typ='b'):
     # This model is only valid with θ=70.3˚. Please refer to Chollacoop et al for more information.
     C *= 1e9
     E_i *= 1e9
@@ -110,7 +110,7 @@ df = pd.read_csv(filename)
 print('New')
 for i in range(len(df)):
     if i not in [0, 23]: # Remove 2 indices that do not converge
-        print(model_swa(df['C (GPa)'][i], df['dP/dh (N/m)'][i], df['nu'][i], df['E* (GPa)'][i], df['hmax(um)'][i], df['hr(um)'][i]))
+        print(model_cho(df['C (GPa)'][i], df['dP/dh (N/m)'][i], df['nu'][i], df['E* (GPa)'][i], df['hmax(um)'][i], df['hr(um)'][i]))
 print('Old')
 for i in range(len(df)):
     if i not in [25]: # Remove 1 indices that do not converge
