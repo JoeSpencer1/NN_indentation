@@ -4,8 +4,8 @@ ab = 65.27 #https://doi.org/10.1557/s43578-021-00113-9
 ac = np.arctan(np.sqrt(3*np.sqrt(3)*np.tan(ab*np.pi/180)**2/np.pi))*180/np.pi #https://www.sci-hub.ren/10.1007/978-1-4419-9872-9
 #ac = 70.32 Is inaccurate.
 r = 0.13826
-h = 1
-d = 1.6#2
+h = 0.9#1
+d = 1.8#2
 
 ab *= np.pi/180
 ac *= np.pi/180

@@ -6,13 +6,13 @@ reset
 create radialmesh numZ 1 zblock 1 0.5 first size 0.5 last size 0.5\
     numR 3 trisection rblock 1 0.5 interval 1 \
         rblock 2 1.25 first size 0.75 last size 0.75 \
-        rblock 3 2 first size 0.75 last size 0.75 \
+        rblock 3 1.8 first size 0.55 last size 0.55 \
     numA 1 span 60 ablock 1 interval 1 # z=0 side of block
 rotate volume 1 2 angle 90 about x include_merged
 create radialmesh numZ 1 zblock 1 1.5 first size 1.5 last size 1.5\
     numR 3 trisection rblock 1 0.5 interval 1 \
         rblock 2 1.25 first size 0.75 last size 0.75 \
-        rblock 3 2 first size 0.75 last size 0.75 \
+        rblock 3 1.8 first size 0.55 last size 0.55 \
     numA 1 span 60 ablock 1 interval 1 # z=0 side of block
 zblock 1 remove volume 1
 rotate volume 3 4 angle 90 about x include_merged
@@ -23,15 +23,15 @@ create block 1
 block 1 add volume 1 2 3 4
 block 1 element type hex27 
 
-create pyramid height 1.003618893150114627 sides 3 radius 4.358035829057745 top 0
+create pyramid height 0.903618893150114627 sides 3 radius 3.9238036858804737 top 0
 rotate volume 5 angle 90 about x 
 move volume 5 x 0 y -0.003618893150114627 z 0
 move volume 5 x 0 y 0.5 z 0
-tweak curve 38 39 40 fillet radius 0.2
+tweak curve 38 39 40 fillet radius 0.13826
 webcut body 5 with plane zplane rotate 120 about y center 0 0 0  
 webcut body 5 with plane zplane
 delete volume 6 7
-create cylinder height 1 radius 2
+create cylinder height 1 radius 1.8
 rotate volume 8 angle 90 about x
 move volume 8 x 0 y 0.5 z 0
 move volume 5 x 0 y -0.00853189048753 z 0
