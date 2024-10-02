@@ -28,7 +28,7 @@ Besides conventional Python packages, the following packages are required to use
 ```
 mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
 ```
-- To accurately integrate the L$^2$ error over quadratic meshes, the `SolutionUserObject.C` file in the `framework/src/userobjects` folder of the MOOSE installation. The variable orders on lines 314 and 335 of `SolutionUserObject.C` were changed from `FIRST` to `SECOND`.
+- To accurately integrate the L$`^2`$ error over quadratic meshes, the `SolutionUserObject.C` file in the `framework/src/userobjects` folder of the MOOSE installation. The variable orders on lines 314 and 335 of `SolutionUserObject.C` were changed from `FIRST` to `SECOND`.
 
 A separate enbironment was used for finite element simulations.
 -MOOSE was installed in a separate environment using the program's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). The derivative size was also set to 300
