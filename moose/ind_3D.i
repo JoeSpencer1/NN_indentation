@@ -4,8 +4,8 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = mesh/3D_ref0.e
-ref = 3
+fname = mesh/3D_rl0.e
+ref = 1
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
@@ -243,10 +243,9 @@ ref = 3
     model = coulomb
     friction_coefficient = 0.4
     normalize_penalty = true
-    formulation = penalty #tangential_penalty
+    formulation = penalty 
     # Set penalty here and in InclinedNoDisplacementBC lower if solution does not converge
     penalty = 1e4#1e3
-    #capture_tolerance = 1e-4
     tangential_tolerance = 1e-1
   []
 []

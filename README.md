@@ -24,17 +24,18 @@ Besides conventional Python packages, the following packages are required to use
 
 ## Finite element models
 - Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)) was configured using a different derivative size. The input files and mesh generation files are located in the [moose](moose) folder.
-- Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder using 4 parallel threads with the commands,
+- Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder. For example, to execute `ind_2D.i` with 4 parallel threads with the message passing interface installed with MOOSE, use the commands,
 ```
 mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
 ```
-- To accurately integrate the L$`^2`$ error over quadratic meshes, the `SolutionUserObject.C` file in the `framework/src/userobjects` folder of the MOOSE installation. The variable orders on lines 314 and 335 of `SolutionUserObject.C` were changed from `FIRST` to `SECOND`.
 
 A separate enbironment was used for finite element simulations.
--MOOSE was installed in a separate environment using the program's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). The derivative size was also set to 300
+-MOOSE was installed in a separate environment using the program's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). 
+- The derivative size was also set to 300
 ```
 ./configure --with-derivative-size=300
 ```
+- To accurately integrate the L$`^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
 
 ## Questions
 For help using this code, please see the issues section or open a new issue.
