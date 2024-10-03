@@ -1,21 +1,20 @@
 # Multi-fidelity neural network
 
 ## Description
-My version of the neural network published by Lu et al., used to model indentation of 33% TiAlTa.
-Lu et al.'s paper can be found [here](https://doi.org/10.1073/pnas.1922210117), and the code they used can be found [here](https://github.com/lululxvi/deep-learning-for-indentation).
+My version of the neural network published by Lu et al., used to extract the mechanical of 33% TiAlTa from nanoindentation.
+Lu et al.'s paper can be found [here](https://doi.org/10.1073/pnas.1922210117), and their code is available on a [GitHub Repository](https://github.com/lululxvi/deep-learning-for-indentation).
 
 ## Data
-The data used in this work can be found in the [data](data) folder. The data was collected from nanoindentation tests performed on samples of 33% TiAlTa at different temperatures.
+The data used in this work can be found in the [data](data) folder. The data was collected from nanoindentation tests performed on samples of 33% TiAlTa.
 
 ## Neural network
 All code is contained in the [src](src) folder. A summary of each file is provided below:
-- The code for the neural network and multi-fidelity neural networks is located in 
-the main project file, [nn.py](src/nn.py).
+- The code for the neural network and multi-fidelity neural networks is located in [nn.py](src/nn.py).
 - The function used to read indentation data from a file and convert it to the program format when needed is found in [data.py](src/data.py).
 - Factors in dataedit.py need to be changed depending on which temperature data is being adjusted. These are temperature, method, and n. This file is used to produce the neural network's input data.
 - Figures used in presentations were created using [figures.py](src/figures.py).
 - Multiple functions can be performed in parallel with [runmultiple.py](src/runmultiple.py) to speed up processing time.
-- Fitting functions developed by [Chollacoop et al.](www.doi.org/10.1016/S1359-6454(03)00186-1) were used in [calculate.py](src/calculate.py). The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
+- Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [calculate.py](src/calculate.py). The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
 
 Besides conventional Python packages, the following packages are required to use the neural network.
 - [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` is used, with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
