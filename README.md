@@ -11,8 +11,6 @@ The data used in this work can be found in the [data](data) folder. The data was
 All code is contained in the [src](src) folder. A summary of each file is provided below:
 - The code for the neural network and multi-fidelity neural networks is located in [nn.py](src/nn.py).
 - The function used to read indentation data from a file and convert it to the program format when needed is found in [data.py](src/data.py).
-- Factors in dataedit.py need to be changed depending on which temperature data is being adjusted. These are temperature, method, and n. This file is used to produce the neural network's input data.
-- Figures used in presentations were created using [figures.py](src/figures.py).
 - Multiple functions can be performed in parallel with [runmultiple.py](src/runmultiple.py) to speed up processing time.
 - Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [fitting.py](src/fitting.py). The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
 - If a different indenter geometry is desired, the required dimensions can be determined using [dimensions.py](src/dimensions.py).
