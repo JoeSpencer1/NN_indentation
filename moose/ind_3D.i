@@ -4,13 +4,13 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = mesh/3D_rl0.e
-ref = 1
+fname = mesh/3D_rq0.e
+ref = 2
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
   volumetric_locking_correction = true
-  order = FIRST
+  order = SECOND
   family = LAGRANGE
 []
   
@@ -44,7 +44,7 @@ ref = 1
   [saved_z]
   []
   [effective_plastic_strain]
-    order = FIRST
+    order = SECOND
     family = MONOMIAL
   []
 []
@@ -248,5 +248,14 @@ ref = 1
     penalty = 1e4#1e3
     tangential_tolerance = 1e-1
   []
+  # [ind_base]
+  #   primary = 4
+  #   secondary = 5
+  #   model = frictionless
+  #   # Investigate von Mises stress at the edge
+  #   correct_edge_dropping = true
+  #   formulation = mortar
+  #   c_normal = 1e2
+  # []
 []
   

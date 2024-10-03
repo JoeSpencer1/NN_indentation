@@ -46,7 +46,7 @@ sideset 6 surface 61 # Indenter z=0 0˚
 sideset 7 surface 59 # Indenter 60˚
 sideset 8 surface 60 # Indenter top
 
-volume 9 size 0.4
+volume 9 size 0.8
 volume 9 scheme auto
 mesh volume 9
 

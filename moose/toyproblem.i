@@ -8,19 +8,18 @@ A = 1
   # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [mesh]
     type = FileMeshGenerator
-    file = 'toy_mesh_q0.e'
+    file = 'toy_mesh_l0.e'
   []
-  # [refine]
-  #   type = RefineBlockGenerator
-  #   input = mesh
-  #   block = 1 
-  #   refinement_type = uniform
-  #   refinement = 1  
-  # []
+  [refine]
+    type = RefineBlockGenerator
+    input = mesh
+    block = 1 
+    refinement = 0
+  []
 []
 
 [GlobalParams]
-  order = SECOND
+  order = FIRST
   family = LAGRANGE
 []
 

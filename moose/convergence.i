@@ -6,11 +6,11 @@ c = 1e9
 l = 0.5
 A = 1
 
-current_refine = outputs/3D_rl1.e #toy_fish_q1.e
+current_refine = toy_fish_l7.e #outputs/3D_rl1.e #
 
-most_refined = outputs/3D_rl3.e #toy_fish_q7.e
-second_refined = outputs/3D_rl2.e #toy_fish_q6.e
-ref_refine = outputs/3D_refl.e #toy_fish_q7.e
+most_refined = toy_fish_l7.e #outputs/3D_rl3.e #
+second_refined = toy_fish_l6.e #outputs/3D_rl2.e #
+ref_refine = toy_fish_l7.e #outputs/3D_refl.e #
 
 
 [Mesh]

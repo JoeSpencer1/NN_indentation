@@ -203,14 +203,14 @@ import pandas as pd
 
 # Toy problem convergence study
 fx = [0.01, 1.5]
-C70lx = [1, 0.5, 0.25, 0.125]
+C70lx = [1, 0.5, 0.25, 0.125, 0.0625]
 # C70ly = [2.50E-06, 9.60E-07, 2.05E-07, 3.85E-08]
 # C70ly = [2.49E-06, 9.53E-07, 2.01E-07, 3.68E-08]
 # C70ly = [2.50E-06, 9.63E-07, 2.06E-07, 3.91E-08]
 # C70ly = [3.38E-06, 1.89E-06, 3.51E-07, 5.94E-08]
-C70ly = [6.25E-05, 2.41E-05, 5.16E-06, 9.78E-07]
-C70qx = [1, 0.5, 0.25, 0.125]
-C70qy = [1.36E-04, 1.72E-05, 2.09E-06, 2.63E-07]
+C70ly = [2.30E-04, 6.39E-05, 1.63E-05, 4.11E-06, 1.03E-06]
+C70qx = [1, 0.5, 0.25, 0.125, 0.0625]
+C70qy = [2.88E-05, 3.59E-06, 4.49E-07, 5.62E-08, 7.04E-09]
 # C70lx = [1, 0.5, 0.25]
 # C70ly = [2.50E-06, 9.60E-07, 2.05E-07]
 # C70qx = [1, 0.5, 0.25]
@@ -232,17 +232,17 @@ f70l = equation(C70lx, C70ly, fx)
 f70q = equation(C70qx, C70qy, fx)
 
 fig, ax = plt.subplots()
-ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(6.25\\cdot10^{-5})h^{2.0}$')
-ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(1.36\\cdot10^{-4})h^{3.0}$')
+ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.40\\cdot10^{-4})h^{1.95}$')
+ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(2.87\\cdot10^{-5})h^{3.0}$')
 ax.plot(fx, f70l, linestyle="--", color='gray')
 ax.plot(fx, f70q, linestyle="--", color='blue')
 ax.plot()
-ax.set_xlabel('Element length (μm)')
+ax.set_xlabel('Element length (m)')
 ax.set_xscale('log')
-ax.set_xlim([0.1, 1.5])
+ax.set_xlim([0.05, 1.5])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([8e-8, 3e-4])
+ax.set_ylim([5e-9, 3e-4])
 ax.grid(False)
 leg = ax.legend(loc='lower right', frameon=False)
 leg.set_title('Element order')
@@ -277,7 +277,7 @@ ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L
 ax.plot(fx, f70l, linestyle="--", color='gray')
 ax.plot(fx, f70q, linestyle="--", color='blue')
 ax.plot()
-ax.set_xlabel('Element length (μm)')
+ax.set_xlabel('Element length (m)')
 ax.set_xscale('log')
 ax.set_xlim([0.1, 1.5])
 ax.set_ylabel('L$_{2}$ error')
