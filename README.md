@@ -2,7 +2,7 @@
 
 ## Description
 My version of the neural network published by Lu et al., used to extract the mechanical of 33% TiAlTa from nanoindentation.
-Lu et al.'s paper can be found [here](https://doi.org/10.1073/pnas.1922210117), and their code is available on a [GitHub Repository](https://github.com/lululxvi/deep-learning-for-indentation).
+Lu et al.'s paper can be found [here](https://doi.org/10.1073/pnas.1922210117), and their code is available on another [GitHub Repository](https://github.com/lululxvi/deep-learning-for-indentation).
 
 ## Data
 The data used in this work can be found in the [data](data) folder. The data was collected from nanoindentation tests performed on samples of 33% TiAlTa.
@@ -15,7 +15,7 @@ All code is contained in the [src](src) folder. A summary of each file is provid
 - Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [fitting.py](src/fitting.py). The yield stress and elastic stress files must be cleared before a new yield stress dataset can be created for a material and model.py can be used.
 - If a different indenter geometry is desired, the required dimensions can be determined using [dimensions.py](src/dimensions.py).
 
-Besides some Python packages that can be used interchangeably, the following packages are required to use the neural network.
+Besides some Python packages discussed in [requirements.txt](src/requirements.txt), the following packages are required to use the neural network.
 - [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` is used, with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
 - [Keras](https://keras.io/) `v2.15.0` is used. DeepXDE will not work with newer versions of Keras like v3.
 - [TensorFlow](https://www.tensorflow.org/) `v2.15.0`, with `tensorflow-probability==0.23.0` (see this DeepXDE [Git issue](https://github.com/lululxvi/deepxde/issues/1682)).
@@ -23,7 +23,7 @@ Besides some Python packages that can be used interchangeably, the following pac
 ## Finite element models
 Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)), with some specific configurations. Input files used for the FEM simulations are located in the [moose](moose) folder.
 - MOOSE was installed in a separate environment using the program's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). 
-- The derivative size was also set to 300
+- The derivative size was also set to 300 in the MOOSE installation's root directory.
 ```
 ./configure --with-derivative-size=300
 ```

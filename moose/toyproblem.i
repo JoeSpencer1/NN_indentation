@@ -1,5 +1,5 @@
 E = 200e9
-nu = 0#0.3
+nu = 0.3
 c = 1e9
 l = 0.5
 A = 1
@@ -8,7 +8,7 @@ A = 1
   # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [mesh]
     type = FileMeshGenerator
-    file = 'toy_mesh_l0.e'
+    file = 'outputs/toyproblem/toy_mesh_l0.e'
   []
   [refine]
     type = RefineBlockGenerator
@@ -75,10 +75,10 @@ A = 1
 []
 
 [Functions]
-  [body_force]
-    type = ParsedFunction
-    value = '${c}*y*t'
-  []
+  # [body_force]
+  #   type = ParsedFunction
+  #   value = '${c}*y*t'
+  # []
   [exact] # For use in calculating the exact solution for the toy problem
     # c=1e8, l=0.5, A=1, E=200e9
     type = ParsedFunction
@@ -91,13 +91,13 @@ A = 1
     displacements = 'disp_x disp_y'
     use_displaced_mesh = true
   []
-  [BodyForce]
-    type = ADBodyForce
-    variable = disp_y
-    block = 1
-    function = body_force
-    use_displaced_mesh = true
-  []
+  # [BodyForce]
+  #   type = ADBodyForce
+  #   variable = disp_y
+  #   block = 1
+  #   function = body_force
+  #   use_displaced_mesh = true
+  # []
 []
 
 [BCs]
@@ -111,27 +111,27 @@ A = 1
     type = DirichletBC
     variable = disp_x
     # Use boundary 5 for pin, boundary 4 for glued
-    boundary = 5
+    boundary = 4
     value = 0
   []
-  # [top_y] # Constant axial load case
-  #   type = FunctionNeumannBC
-  #   variable = disp_y
-  #   boundary = 2
-  #   function = '-1e8*t'
-  # []
+  [top_y] # Constant axial load case
+    type = FunctionNeumannBC
+    variable = disp_y
+    boundary = 2
+    function = '-1e8*t'
+  []
   # [top_y] # Linearly varied axial load case
   #   type = FunctionNeumannBC
   #   variable = disp_y
   #   boundary = 2
   #   function = '-2e8*t*x'
   # []
-  [top_y] # Fish book problem. c=1e8, l=0.5, A=1
-    type = FunctionNeumannBC
-    variable = disp_y
-    boundary = 2
-    function = '-${c}*((${l}^2)/${A})*t'
-  []
+  # [top_y] # Fish book problem. c=1e8, l=0.5, A=1
+  #   type = FunctionNeumannBC
+  #   variable = disp_y
+  #   boundary = 2
+  #   function = '-${c}*((${l}^2)/${A})*t'
+  # []
 []
 
 [Materials]

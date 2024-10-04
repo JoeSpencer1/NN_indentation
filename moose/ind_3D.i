@@ -5,7 +5,7 @@ hm = 0.226 #0.226
 nu = 0.25
 
 fname = mesh/3D_rq0.e
-ref = 2
+ref = 3
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
@@ -23,7 +23,7 @@ ref = 2
     type = RefineBlockGenerator
     input = initial
     block = '1 2'
-    refinement = '${ref} ${ref}'
+    refinement = '${ref} 2'#${ref}'
   []
 []
   
