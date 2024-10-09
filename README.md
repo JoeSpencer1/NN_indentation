@@ -33,7 +33,7 @@ Finite element method (FEM) simulations were performed usinng the Multi-physics 
 ```
 mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
 ```
-- To accurately integrate the $`L^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
+- To accurately integrate the $`\text{L}^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
 
 ## Questions
 For help using this code, please consult the issues section.
