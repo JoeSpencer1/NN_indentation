@@ -1,11 +1,10 @@
 # Multi-fidelity neural network
 
 ## Description
-My version of the neural network published by Lu et al., used to extract the mechanical of 33% TiAlTa from nanoindentation.
-Lu et al.'s paper can be found [here](https://doi.org/10.1073/pnas.1922210117), and their code is available on another [GitHub Repository](https://github.com/lululxvi/deep-learning-for-indentation).
+My version of the [DeepXDE](https://doi.org/10.1137/19M1274067) neural network used to extract the mechanical of 33% TiAlTa from nanoindentation originally published by [Lu et al.](https://doi.org/10.1073/pnas.1922210117). Lu et al.'s code can be referred to in another [GitHub Repository](https://github.com/lululxvi/deep-learning-for-indentation).
 
 ## Data
-The data used in this work can be found in the [data](data) folder. The data was collected from 2D FEM simulations, 3D FEM simulations, and experimental nanoindentation tests performed on a sample of 33% TiAlTa. A compression test was used to find Poisson's ratio ($`\nu`$) for the metal.
+The data used in this work can be found in the [data](data) folder. The data was collected from 2D FEM simulations, 3D FEM simulations, and experimental nanoindentation tests performed on a sample of 33% TiAlTa. A compression test was used to find Poisson's ratio for the metal.
 
 ## Neural network
 All code is contained in the [src](src) folder. A summary of each file is provided below:
@@ -15,7 +14,7 @@ All code is contained in the [src](src) folder. A summary of each file is provid
 - Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [fitting.py](src/fitting.py). The yield stress and plastic stress files must be cleared before a new yield dataset can be calculated.
 - If a different indenter geometry is desired, the required dimensions can be determined using [dimensions.py](src/dimensions.py).
 
-Besides some Python packages discussed in [requirements.txt](src/requirements.txt), the following packages are required to use the neural network.
+Besides some Python packages listed in [requirements.txt](src/requirements.txt), the following packages are required to use the neural network.
 - [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` is used, with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
 - [Keras](https://keras.io/) `v2.15.0` is used. DeepXDE will not work with newer versions of Keras like v3.
 - [TensorFlow](https://www.tensorflow.org/) `v2.15.0`, with `tensorflow-probability==0.23.0` (see this DeepXDE [Git issue](https://github.com/lululxvi/deepxde/issues/1682)).
