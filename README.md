@@ -11,7 +11,7 @@ All code is contained in the [src](src) folder. A summary of each file is provid
 - The code for the neural network and multi-fidelity neural networks is located in [nn.py](src/nn.py).
 - The function used to read indentation data from a file and convert it to the program format when needed is found in [data.py](src/data.py).
 - Multiple functions can be performed in parallel with [runmultiple.py](src/runmultiple.py) to speed up processing time.
-- Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [fitting.py](src/fitting.py). The yield stress and plastic stress files must be cleared before a new yield dataset can be calculated.
+- Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [fitting.py](src/fitting.py). The yield and plastic stress files must be cleared before a new yield dataset can be calculated.
 - If a different indenter geometry is desired, the required dimensions can be determined using [dimensions.py](src/dimensions.py).
 
 Besides some Python packages listed in [requirements.txt](src/requirements.txt), the following packages are required to use the neural network.
@@ -22,7 +22,7 @@ Besides some Python packages listed in [requirements.txt](src/requirements.txt),
 ## Finite element method
 Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)) in the [moose](moose) folder with some specific configurations.
 - MOOSE was installed in a separate environment using the software's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). 
--[Volumetric locking](https://mooseframework.inl.gov/modules/solid_mechanics/VolumetricLocking.html) correction is only needed in the \[GlobalParams\] block for simulations with first-order elements and should be commented for second-order simulations.
+- [Volumetric locking](https://mooseframework.inl.gov/modules/solid_mechanics/VolumetricLocking.html) correction is only needed in the \[GlobalParams\] block for simulations with first-order elements and should be commented for second-order simulations.
 - The derivative size should be increased to 300 in the MOOSE installation's root directory to allow automatic differentiation ([AD](https://mooseframework.inl.gov/automatic_differentiation/)) functions to be used with refined quadratic meshes in `ind_3D_AD.i`.
 ```
 ./configure --with-derivative-size=300
@@ -32,7 +32,7 @@ Finite element method (FEM) simulations were performed usinng the Multi-physics 
 ```
 mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
 ```
-- To accurately integrate the $`L^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
+- To accurately integrate the $`\text{L}^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
 
 ## Questions
 For help using this code, please consult the issues section.
