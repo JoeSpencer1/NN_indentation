@@ -6,7 +6,7 @@ hm = 0.226 #0.226
 nu = 0.25
 # For coarse meshes, you may need to decrease contact penalty to 1e3 
 fname = mesh/2D_rq0.e
-ref = 4
+ref = 3
 
 
 [GlobalParams]
@@ -22,6 +22,19 @@ ref = 4
     type = FileMeshGenerator
     file = ${fname}
   []
+  # final_generator = refine # These next three sections for mortar contact that still doesn't work.
+  # [Lower_top]
+  #   type = LowerDBlockFromSidesetGenerator
+  #   input = initial
+  #   sidesets = '4 5 6 7'
+  #   new_block_id = 1004
+  # []
+  # [Lower_bottom]
+  #   type = LowerDBlockFromSidesetGenerator
+  #   input = initial
+  #   sidesets = '1 2 3'
+  #   new_block_id = 1002
+  # []
   [refine]
     type = RefineBlockGenerator
     input = initial
@@ -219,7 +232,7 @@ ref = 4
 []
   
 [Contact]
-  [ind_base]
+  [ind_base] # Frictional
     primary = 2
     secondary = 4
     model = coulomb
@@ -231,4 +244,24 @@ ref = 4
     #capture_tolerance = 1e-4
     tangential_tolerance = 1e-1
   []
+  # [ind_base] # Frictionless
+  #   primary = 2
+  #   secondary = 4
+  #   model = frictionless
+  #   normalize_penalty = true
+  #   formulation = penalty
+  #   # Set penalty lower if solution does not converge
+  #   penalty = 1e4#1e3
+  #   tangential_tolerance = 1e-1
+  # []
+  # [ind_base] # Mortar contact, still does not work
+  #   primary = 1002
+  #   secondary = 1004
+  #   model = coulomb
+  #   friction_coefficient = 0.4
+  #   formulation = mortar
+  #   c_normal = 1e4 #8
+  #   c_tangential = 1e4 #8
+  #   correct_edge_dropping = true
+  # []
 []  

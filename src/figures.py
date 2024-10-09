@@ -203,14 +203,14 @@ import pandas as pd
 
 # Toy problem convergence study
 fx = [0.01, 1.5]
-C70lx = [1, 0.5, 0.25, 0.125, 0.0625]
+C70lx = [0.5, 0.25, 0.125, 0.0625]
 # C70ly = [2.50E-06, 9.60E-07, 2.05E-07, 3.85E-08]
 # C70ly = [2.49E-06, 9.53E-07, 2.01E-07, 3.68E-08]
 # C70ly = [2.50E-06, 9.63E-07, 2.06E-07, 3.91E-08]
 # C70ly = [3.38E-06, 1.89E-06, 3.51E-07, 5.94E-08]
-C70ly = [2.30E-04, 6.39E-05, 1.63E-05, 4.11E-06, 1.03E-06]
+C70ly = [1.32E-13, 1.35E-13, 1.13E-13, 1.60E-13]
 C70qx = [1, 0.5, 0.25, 0.125, 0.0625]
-C70qy = [2.88E-05, 3.59E-06, 4.49E-07, 5.62E-08, 7.04E-09]
+C70qy = [6.68E-15, 7.28E-15, 6.66E-15, 6.65E-15, 7.45E-15]
 # C70lx = [1, 0.5, 0.25]
 # C70ly = [2.50E-06, 9.60E-07, 2.05E-07]
 # C70qx = [1, 0.5, 0.25]
@@ -232,8 +232,8 @@ f70l = equation(C70lx, C70ly, fx)
 f70q = equation(C70qx, C70qy, fx)
 
 fig, ax = plt.subplots()
-ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.40\\cdot10^{-4})h^{1.95}$')
-ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(2.87\\cdot10^{-5})h^{3.0}$')
+ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(1.11\\cdot10^{-13})h^{-0.09}$')
+ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(6.69\\cdot10^{-15})h^{-0.04}$')
 ax.plot(fx, f70l, linestyle="--", color='gray')
 ax.plot(fx, f70q, linestyle="--", color='blue')
 ax.plot()
@@ -242,19 +242,28 @@ ax.set_xscale('log')
 ax.set_xlim([0.05, 1.5])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([5e-9, 3e-4])
+ax.set_ylim([1e-15, 5e-13])
 ax.grid(False)
 leg = ax.legend(loc='lower right', frameon=False)
 leg.set_title('Element order')
 # ax.set_title('Convergence study with sinusoidal loading along a beam')
-plt.savefig('/Users/joe/Desktop/convergence.pdf', dpi=800, bbox_inches="tight")
+plt.savefig('/Users/joe/Desktop/toyoutput1.pdf', dpi=800, bbox_inches="tight")
 plt.show()
+
 # Toy problem convergence study
 fx = [0.01, 1.5]
-C70lx = [0.5, 0.25, 0.125]
-C70ly = [1.74E-26, 1.83E-26, 1.28E-26]
-C70qx = [1, 0.5, 0.25, 0.125]
-C70qy = [1.26E-23, 1.29E-23, 1.35E-23, 1.23E-23]
+C70lx = [1, 0.5, 0.25, 0.125, 0.0625]
+# C70ly = [2.50E-06, 9.60E-07, 2.05E-07, 3.85E-08]
+# C70ly = [2.49E-06, 9.53E-07, 2.01E-07, 3.68E-08]
+# C70ly = [2.50E-06, 9.63E-07, 2.06E-07, 3.91E-08]
+# C70ly = [3.38E-06, 1.89E-06, 3.51E-07, 5.94E-08]
+C70ly = [9.20E-06, 6.87E-06, 2.96E-06, 1.22E-06, 4.83E-07]
+C70qx = [1, 0.5, 0.25, 0.125, 0.0625]
+C70qy = [7.22E-06, 2.96E-06, 1.23E-06, 4.69E-07, 1.74E-07]
+# C70lx = [1, 0.5, 0.25]
+# C70ly = [2.50E-06, 9.60E-07, 2.05E-07]
+# C70qx = [1, 0.5, 0.25]
+# C70qy = [5.46E-06, 6.88E-07, 8.34E-08]
 
 def equation(x, y, eqx):
     l = len(x) - 1
@@ -272,22 +281,73 @@ f70l = equation(C70lx, C70ly, fx)
 f70q = equation(C70qx, C70qy, fx)
 
 fig, ax = plt.subplots()
-ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.18\\cdot10^{-26})h^{0.2}$')
-ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(1.31\\cdot10^{-23})h^{0.01}$')
+ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(1.22\\cdot10^{-5})h^{1.06}$')
+ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(7.55\\cdot10^{-6})h^{1.34}$')
 ax.plot(fx, f70l, linestyle="--", color='gray')
 ax.plot(fx, f70q, linestyle="--", color='blue')
 ax.plot()
 ax.set_xlabel('Element length (m)')
 ax.set_xscale('log')
-ax.set_xlim([0.1, 1.5])
+ax.set_xlim([0.05, 1.5])
 ax.set_ylabel('L$_{2}$ error')
 ax.set_yscale('log')
-ax.set_ylim([1e-28, 4e-23])
+ax.set_ylim([5e-9, 3e-4])
 ax.grid(False)
 leg = ax.legend(loc='lower right', frameon=False)
 leg.set_title('Element order')
-# ax.set_title('Convergence study with uniform compression')
-plt.savefig('/Users/joe/Desktop/convergence1.pdf', dpi=800, bbox_inches="tight")
+# ax.set_title('Convergence study with sinusoidal loading along a beam')
+plt.savefig('/Users/joe/Desktop/toyoutput2.pdf', dpi=800, bbox_inches="tight")
+plt.show()
+
+# Toy problem convergence study
+fx = [0.01, 1.5]
+C70lx = [1, 0.5, 0.25, 0.125, 0.0625]
+# C70ly = [2.50E-06, 9.60E-07, 2.05E-07, 3.85E-08]
+# C70ly = [2.49E-06, 9.53E-07, 2.01E-07, 3.68E-08]
+# C70ly = [2.50E-06, 9.63E-07, 2.06E-07, 3.91E-08]
+# C70ly = [3.38E-06, 1.89E-06, 3.51E-07, 5.94E-08]
+C70ly = [2.30E-04, 6.39E-05, 1.63E-05, 4.10E-06, 1.02E-06]
+C70qx = [1, 0.5, 0.25, 0.125, 0.0625]
+C70qy = [2.88E-05, 3.59E-06, 4.49E-07, 5.62E-08, 7.04E-09]
+C2y = [2.30E-04, 6.39E-05, 1.63E-05, 4.11E-06, 1.03E-06]
+# C70lx = [1, 0.5, 0.25]
+# C70ly = [2.50E-06, 9.60E-07, 2.05E-07]
+# C70qx = [1, 0.5, 0.25]
+# C70qy = [5.46E-06, 6.88E-07, 8.34E-08]
+
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(3):
+        C += (1/3)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+f70l = equation(C70lx, C70ly, fx)
+f70q = equation(C70qx, C70qy, fx)
+
+fig, ax = plt.subplots()
+ax.scatter(C70lx, C2y, color='yellow', marker='o', s=100, label='Linear 2D exact: $||e||_{L_{2}}=(2.40\\cdot10^{-4})h^{1.95}$')
+ax.scatter(C70lx, C70ly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.40\\cdot10^{-4})h^{1.95}$')
+ax.scatter(C70qx, C70qy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(2.87\\cdot10^{-5})h^{3.0}$')
+ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.plot(fx, f70q, linestyle="--", color='blue')
+ax.plot()
+ax.set_xlabel('Element length (m)')
+ax.set_xscale('log')
+ax.set_xlim([0.05, 1.5])
+ax.set_ylabel('L$_{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([5e-9, 3e-4])
+ax.grid(False)
+leg = ax.legend(loc='lower right', frameon=False)
+leg.set_title('Element order')
+# ax.set_title('Convergence study with sinusoidal loading along a beam')
+plt.savefig('/Users/joe/Desktop/toyoutput3.pdf', dpi=800, bbox_inches="tight")
 plt.show()
 
 # # NN trained using only Exp data
@@ -346,6 +406,49 @@ plt.show()
 # #              bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
 # #plt.savefig("/Users/Joe/Desktop/NN_exp.pdf", dpi=800, bbox_inches="tight")
 # plt.show()
+
+# NN trained using only Exp data
+n = [2, 3, 4, 5, 6, 8, 10, 15]
+expσ = [74.99, 229.59, 41.16, 55.95, 23.93, 13.79, 5.93, 2.27]
+εexpσ = [48.20, 322.59, 18.52, 96.40, 18.64, 9.51, 3.30, 1.74]
+expE = [101.85, 69.65, 16.93, 18.11, 9.79, 4.71, 3.07, 2.56]
+εexpE = [76.39, 54.69, 9.46, 10.72, 6.12, 3.10, 2.16, 4.19]
+
+fig, ax = plt.subplots(figsize=(6, 5))
+ax.errorbar(n, expσ, yerr=εexpσ, color='blue', label="NN, experimental training data")
+ax.set_yscale('log')
+ax.set_ylim([1, 1500])
+ax.set_xlim([-0.5, 16])
+ax.set_xticks([0, 5, 10, 15])
+ax.set_xticklabels([0, 5, 10, 15])
+ax.set_yticks([1, 5, 20, 200, 1500])
+ax.set_yticklabels([1, 5, 20, 200, 1500])
+ax.legend(frameon=False)
+ax.set_ylabel("MAPE (%)")
+ax.set_xlabel("Experimental training data size")
+ax.annotate("A: $\sigma_{y}$", xy=(0.05, 0.95), xycoords="axes fraction",
+            fontsize=12, ha="center",
+            bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+plt.savefig("/Users/Joe/Desktop/graphs/NN_exp_sy.pdf", dpi=800, bbox_inches="tight")
+
+fig, ax = plt.subplots(figsize=(6, 5))
+ax.errorbar(n, expE, yerr=εexpE, color='blue')
+ax.set_yscale('log')
+ax.set_ylim([1, 1500])
+ax.set_xlim([-0.5, 16])
+ax.set_xticks([0, 5, 10, 15])
+ax.set_xticklabels([0, 5, 10, 15])
+ax.set_yticks([1, 5, 20, 200, 1500])
+ax.set_yticklabels([1, 5, 20, 200, 1500])
+ax.set_ylabel("MAPE (%)")
+ax.set_xlabel("Experimental training data size")
+ax.annotate("B: $E_{r}$", xy=(0.05, 0.95), xycoords="axes fraction",
+            fontsize=12, ha="center",
+            bbox=dict(boxstyle="round,pad=0.3", edgecolor="black", facecolor="lightgray"))
+
+plt.tight_layout()
+plt.savefig("/Users/Joe/Desktop/graphs/NN_exp_Er.pdf", dpi=800, bbox_inches="tight")
+plt.show()
 
 '''
 # NN trained using only 3D FEM data

@@ -4,13 +4,13 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = ../mesh/3D_rl0.e
-ref = 4
+fname = mesh/3D_rq0.e
+ref = 1
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
-  volumetric_locking_correction = true
-  order = FIRST
+  # volumetric_locking_correction = true
+  order = SECOND
   family = LAGRANGE
 []
   
@@ -44,14 +44,14 @@ ref = 4
   [saved_z]
   []
   [effective_plastic_strain]
-    order = CONSTANT
+    order = SECOND
     family = MONOMIAL
   []
 []
   
 [AuxKernels]
   [effective_plastic_strain]
-    type = MaterialRealAux
+    type = ADMaterialRealAux
     variable = effective_plastic_strain
     property = effective_plastic_strain
     block = 1
@@ -61,12 +61,12 @@ ref = 4
 [Physics/SolidMechanics/QuasiStatic]
   [all]
     add_variables = true
-    new_system = true
-    formulation = UPDATED
     strain = FINITE
     block = '1 2'
-    generate_output = 'cauchy_stress_xx cauchy_stress_xy cauchy_stress_xz cauchy_stress_yy cauchy_stress_zz vonmises_stress'
+    use_automatic_differentiation = true
+    generate_output = 'stress_xx stress_xy stress_xz stress_yy stress_zz vonmises_stress'
     save_in = 'saved_x saved_y saved_z'
+    use_finite_deform_jacobian = true
   []
 []
   
@@ -113,33 +113,30 @@ ref = 4
   
 [Materials]
   [tensor]
-    type = ComputeIsotropicElasticityTensor
+    type = ADComputeIsotropicElasticityTensor
     block = '2'
     youngs_modulus = 1143 #E, GPa
     poissons_ratio = 0.0691 #ν
   []
   [stress]
-    type = ComputeFiniteStrainElasticStress
+    type = ADComputeFiniteStrainElasticStress
     block = '2'
-  []
-  [stress_wrapped]
-    type = ComputeLagrangianWrappedStress
   []
 
   [tensor_2]
-    type = ComputeIsotropicElasticityTensor
+    type = ADComputeIsotropicElasticityTensor
     block = '1'
     youngs_modulus = ${E} #139 #E, GPa
     poissons_ratio = ${nu} #0.25 #ν
   []
   [power_law_hardening]
-    type = IsotropicPowerLawHardeningStressUpdate
+    type = ADIsotropicPowerLawHardeningStressUpdate
     strength_coefficient = ${K} #7.26 #K, GPa
     strain_hardening_exponent = ${n} #0.195 #n
     block = '1'
   []
   [radial_return_stress]
-    type = ComputeMultipleInelasticStress
+    type = ADComputeMultipleInelasticStress
     inelastic_models = 'power_law_hardening'
     block = '1'
   []
@@ -148,7 +145,7 @@ ref = 4
 [Postprocessors]
   [stress_yy]
     type = ElementAverageValue
-    variable = cauchy_stress_yy
+    variable = stress_yy
     block = 1
   []
   [react_y_top]
@@ -191,7 +188,7 @@ ref = 4
   nl_max_its = 50
   dt = 0.01
   dtmin = 0.00001
-  end_time = 1.5
+  end_time = 1.0#5
   nl_rel_tol = 1e-6
   nl_abs_tol = 1e-10
   automatic_scaling = true
@@ -246,10 +243,19 @@ ref = 4
     model = coulomb
     friction_coefficient = 0.4
     normalize_penalty = true
-    formulation = penalty #tangential_penalty
+    formulation = penalty 
     # Set penalty here and in InclinedNoDisplacementBC lower if solution does not converge
     penalty = 1e4#1e3
-    #capture_tolerance = 1e-4
     tangential_tolerance = 1e-1
   []
+  # [ind_base]
+  #   primary = 4
+  #   secondary = 5
+  #   model = frictionless
+  #   # Investigate von Mises stress at the edge
+  #   correct_edge_dropping = true
+  #   formulation = mortar
+  #   c_normal = 1e2
+  # []
 []
+  

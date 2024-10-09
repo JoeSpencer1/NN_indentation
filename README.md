@@ -20,8 +20,8 @@ Besides some Python packages discussed in [requirements.txt](src/requirements.tx
 - [Keras](https://keras.io/) `v2.15.0` is used. DeepXDE will not work with newer versions of Keras like v3.
 - [TensorFlow](https://www.tensorflow.org/) `v2.15.0`, with `tensorflow-probability==0.23.0` (see this DeepXDE [Git issue](https://github.com/lululxvi/deepxde/issues/1682)).
 
-## Finite element models
-Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)), with some specific configurations. Input files used for the FEM simulations are located in the [moose](moose) folder.
+## Finite element method
+Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)) in the [moose](moose) folder with some specific configurations.
 - MOOSE was installed in a separate environment using the program's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). 
 - Volumetric locking correction is only needed in the \[GlobalParams\] block for simulations with first-order elements and should be commented for second-order simulations.
 - The derivative size should be increased to 300 in the MOOSE installation's root directory to allow automatic differentiation ([AD](https://mooseframework.inl.gov/automatic_differentiation/)) functions to be used with refined quadratic meshes in `ind_3D_AD.i`.

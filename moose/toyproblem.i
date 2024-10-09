@@ -8,13 +8,13 @@ A = 1
   # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [mesh]
     type = FileMeshGenerator
-    file = 'outputs/toyproblem/toy_mesh_l0.e'
+    file = 'mesh/3D_ref0l.e'
   []
   [refine]
     type = RefineBlockGenerator
     input = mesh
-    block = 1 
-    refinement = 0
+    block = '1 2'
+    refinement = 4
   []
 []
 

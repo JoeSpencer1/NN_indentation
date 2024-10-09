@@ -6,17 +6,17 @@ c = 1e9
 l = 0.5
 A = 1
 
-current_refine = toy_com1_l7.e #outputs/3D_rl1.e #
+current_refine = outputs/toyproblem/toy_flat_l7.e #outputs/convergence/3D_rl1.e #
 
-most_refined = toy_com1_l7.e #outputs/3D_rl3.e #
-second_refined = toy_com1_l6.e #outputs/3D_rl2.e #
-ref_refine = toy_com1_l7.e #outputs/3D_refl.e #
+most_refined = outputs/toyproblem/toy_flat_l7.e #outputs/convergence/3D_rl3.e #
+second_refined = outputs/toyproblem/toy_flat_l6.e #outputs/convergence/3D_rl2.e #
+ref_refine = outputs/toyproblem/toy_flat_l7.e #outputs/convergence/3D_refl.e #
 
 
 [Mesh]
   # This is the input or output mesh for whichever refinement level you want to integrate
   file = ${ref_refine}
-  block = 1#'1 2'
+  block = '1 2'
 []
 
 [GlobalParams]
@@ -138,12 +138,12 @@ ref_refine = toy_com1_l7.e #outputs/3D_refl.e #
   [rich_top]
     type = ElementIntegralMaterialProperty
     mat_prop = toperror
-    block = 1#'1 2'
+    block = '1 2'
   []
   [rich_bottom]
     type = ElementIntegralMaterialProperty
     mat_prop = bottomerror
-    block = 1#'1 2'
+    block = '1 2'
   []
   [rich_normal]
     type = ParsedPostprocessor
