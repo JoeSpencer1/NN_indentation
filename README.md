@@ -23,11 +23,13 @@ Besides some Python packages discussed in [requirements.txt](src/requirements.tx
 ## Finite element models
 Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)), with some specific configurations. Input files used for the FEM simulations are located in the [moose](moose) folder.
 - MOOSE was installed in a separate environment using the program's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). 
-- The derivative size was also set to 300 in the MOOSE installation's root directory.
+- Volumetric locking correction is only needed in the \[GlobalParams\] block for simulations with first-order elements
+- The derivative size should be increased to 300 in the MOOSE installation's root directory to allow automatic differentiation ([AD](https://mooseframework.inl.gov/automatic_differentiation/)) functions to be used with refined quadratic meshes in `ind_3D_AD.i`.
 ```
 ./configure --with-derivative-size=300
 ```
-- Contact problems like this one can be executed in the `~/projects/moose/modules/contact/` folder. For example, to execute `ind_2D.i` with 4 parallel threads using the message passing interface installed with MOOSE, use
+- If the derivative size cannot be adjusted, use `ind_3D.i` to perform 3D simulations . 
+- Contact problems like this can be executed in the `~/projects/moose/modules/contact/` folder. For example, to execute `ind_2D.i` with 4 parallel threads using the message passing interface installed with MOOSE, use
 ```
 mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
 ```
