@@ -5,7 +5,7 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 # For coarse meshes, you may need to decrease contact penalty to 1e3 
-fname = ../mesh/2D_rq0.e
+fname = mesh/2D_rl0.e
 
 # substrate refinement
 ref = 0
@@ -14,8 +14,8 @@ refi = 0
 
 [GlobalParams]
   displacements = 'disp_x disp_y'
-  # volumetric_locking_correction = true
-  order = SECOND
+  volumetric_locking_correction = true
+  order = FIRST
   family = LAGRANGE
 []
   
@@ -67,7 +67,7 @@ refi = 0
   [saved_y]
   []
   [effective_plastic_strain]
-    order = SECOND
+    order = FIRST
     family = MONOMIAL
   []
 []

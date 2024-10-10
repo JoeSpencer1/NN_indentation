@@ -28,9 +28,9 @@ Finite element method (FEM) simulations were performed usinng the Multi-physics 
 ./configure --with-derivative-size=300
 ```
 - If the derivative size cannot be adjusted, use `ind_3D.i` to perform 3D simulations. 
-- Contact problems like this can be executed using different executables, including custom executables or `combined-opt` or `~/projects/moose/modules/contact/contact-opt`. For example, to execute `ind_2D.i` with 4 parallel threads, run
+- Contact problems like this can be executed using different executables, including custom executables or `combined-opt` or `~/projects/moose/modules/contact/contact-opt`. For example, to execute `ind_2D.i` with custom values of 3 and 2 for the `ref` and `refi` refinement variables, run
 ```
-mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i
+mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i -input-params ref=3 refi=2
 ```
 - To accurately integrate the $`\text{L}^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
 
