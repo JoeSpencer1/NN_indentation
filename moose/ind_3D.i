@@ -35,8 +35,8 @@ refi = 0
   [push_down]
     type = PiecewiseLinear
     xy_data = '0  0
-         1   -${hm}'
-        #  1.5  0'
+         1   -${hm}
+         1.5  0'
   [] #Indenter displacement, μm
 []
   

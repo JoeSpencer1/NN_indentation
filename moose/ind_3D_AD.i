@@ -35,8 +35,8 @@ refi = 0
   [push_down]
     type = PiecewiseLinear
     xy_data = '0  0
-         1   -${hm}'
-        #  1.5  0'
+         1   -${hm}
+         1.5  0'
   [] #Indenter displacement, μm
 []
   
@@ -192,7 +192,7 @@ refi = 0
   nl_max_its = 50
   dt = 0.01
   dtmin = 0.00001
-  end_time = 1.0#5
+  end_time = 1.5
   nl_rel_tol = 1e-6
   nl_abs_tol = 1e-10
   automatic_scaling = true
