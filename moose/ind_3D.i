@@ -4,7 +4,7 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = ../mesh/3D_rq0.e
+fname = mesh/3D_rq0.e
 
 # substrate refinement
 ref = 0
