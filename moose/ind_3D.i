@@ -5,7 +5,11 @@ hm = 0.226 #0.226
 nu = 0.25
 
 fname = ../mesh/3D_rl0.e
-ref = 4
+
+# substrate refinement
+ref = 0
+# indenter refinement
+refi = 0
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
@@ -23,7 +27,7 @@ ref = 4
     type = RefineBlockGenerator
     input = initial
     block = '1 2'
-    refinement = '${ref} ${ref}'
+    refinement = '${ref} ${refi}'
   []
 []
   

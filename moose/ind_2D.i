@@ -5,13 +5,16 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 # For coarse meshes, you may need to decrease contact penalty to 1e3 
-fname = mesh/2D_rq0.e
-ref = 3
+fname = ../mesh/2D_rq0.e
 
+# substrate refinement
+ref = 0
+# indenter refinement
+refi = 0
 
 [GlobalParams]
   displacements = 'disp_x disp_y'
-  volumetric_locking_correction = true
+  # volumetric_locking_correction = true
   order = SECOND
   family = LAGRANGE
 []
@@ -39,7 +42,7 @@ ref = 3
     type = RefineBlockGenerator
     input = initial
     block = '1 2'
-    refinement = '${ref} ${ref}'
+    refinement = '${refi} ${ref}'
   []
 []
   
