@@ -3,18 +3,19 @@ nu = 0.3
 c = 1e9
 l = 0.5
 A = 1
+ref = 0
 
 [Mesh]
   # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [mesh]
     type = FileMeshGenerator
-    file = 'mesh/3D_ref0l.e'
+    file = outputs/toyproblem/toy_mesh_l0.e
   []
   [refine]
     type = RefineBlockGenerator
     input = mesh
-    block = '1 2'
-    refinement = 4
+    block = 1#'1 2'
+    refinement = ${ref}
   []
 []
 
@@ -111,7 +112,7 @@ A = 1
     type = DirichletBC
     variable = disp_x
     # Use boundary 5 for pin, boundary 4 for glued
-    boundary = 4
+    boundary = 5
     value = 0
   []
   [top_y] # Constant axial load case

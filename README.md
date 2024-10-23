@@ -20,17 +20,12 @@ Besides some Python packages listed in [requirements.txt](src/requirements.txt),
 - [TensorFlow](https://www.tensorflow.org/) `v2.15.0`, with `tensorflow-probability==0.23.0` (see this DeepXDE [Git issue](https://github.com/lululxvi/deepxde/issues/1682)).
 
 ## Finite element method
-Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)) in the [moose](moose) folder with some specific configurations.
+Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)) with some specific configurations. Files used in these simulations can be found in the [moose](moose) folder.
 - MOOSE was installed in a separate environment using the software's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). 
-- [Volumetric locking](https://mooseframework.inl.gov/modules/solid_mechanics/VolumetricLocking.html) correction is only needed in the \[GlobalParams\] block for simulations with first-order elements and should be commented for second-order simulations.
-- The derivative size should be increased to 300 in the MOOSE installation's root directory to allow automatic differentiation ([AD](https://mooseframework.inl.gov/automatic_differentiation/)) functions to be used with refined quadratic meshes in `ind_3D_AD.i`.
+- [Volumetric locking](https://mooseframework.inl.gov/modules/solid_mechanics/VolumetricLocking.html) correction is needed in the \[GlobalParams\] block for simulations with first-order shape functions and should be commented for second-order simulations.
+- Contact problems like this can be executed using different executables, including custom executables, `combined-opt`, or `~/projects/moose/modules/contact/contact-opt`. For example, to execute `ind_2D_l.i` with custom values of 3 and 2 for the `ref` and `refi` refinement variables, run
 ```
-./configure --with-derivative-size=300
-```
-- If the derivative size cannot be adjusted, use `ind_3D.i` to perform 3D simulations. 
-- Contact problems like this can be executed using different executables, including custom executables or `combined-opt` or `~/projects/moose/modules/contact/contact-opt`. For example, to execute `ind_2D.i` with custom values of 3 and 2 for the `ref` and `refi` refinement variables, run
-```
-mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D.i -input-params ref=3 refi=2
+mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D_l.i -input-params ref=3 refi=2
 ```
 - To accurately integrate the $`\text{L}^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
 

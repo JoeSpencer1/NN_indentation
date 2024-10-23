@@ -2,7 +2,6 @@
 data/.DS_Store
 .vscode
 .history
-*.sh
 *.e
 *.dat
 src/__pycache__
