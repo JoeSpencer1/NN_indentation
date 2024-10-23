@@ -10,8 +10,8 @@ delete volume 1
 webcut volume 3 with plane yplane offset -1.2
 webcut volume all with cylinder radius 1.2 axis y
 merge volume all
-volume all size 0.3
-volume 6 size 0.07
+volume all size 0.9#0.3
+volume 6 size 0.21#0.07
 mesh volume all
 
 block 1 volume 6 4 5 3
@@ -31,12 +31,14 @@ move volume 10 x 0 y 0.5 z 0
 move volume 7 x 0 y -0.00853189048753 z 0
 webcut body 7 tool volume 10
 delete volume 7 10
-split curve 134 fraction 0.9
+split curve 134 fraction 0.9#0.6
 webcut volume 11 plane vertex 77 45 78
 merge volume 11 12
 volume 12 scheme sweep source surface 92 72 target surface 99
 volume 11 scheme sweep source surface 91 target surface 95
-volume 11 12 size 0.2
+#volume 11 12 size 0.6#0.2
+volume 11 size 0.3#0.2
+volume 12 size 0.6#0.2
 mesh volume 11 12
 
 sideset 1 surface 38 31 # Substrate bottom

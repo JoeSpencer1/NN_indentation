@@ -4,7 +4,7 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = ../mesh/3D_r0.e
+fname = mesh/3D_r0.e
 
 # substrate refinement
 ref = 0
@@ -108,12 +108,12 @@ refi = 0
   [InclinedNoDisplacementBC]
     [indenter_60]
     boundary = 3
-    penalty = 1e4#1e3
+    penalty = 5e3#1e4#1e3
     displacements = 'disp_x disp_y disp_z'
     []
     [specimen_60]
     boundary = 7
-    penalty = 1e4#1e3
+    penalty = 5e3#1e4#1e3
     displacements = 'disp_x disp_y disp_z'
     []
   []
@@ -278,7 +278,8 @@ refi = 0
     normalize_penalty = true
     formulation = penalty #tangential_penalty
     # Set penalty here and in InclinedNoDisplacementBC lower if solution does not converge
-    penalty = 1e4
+    penalty = 5e3#1e4
+    normal_smoothing_distance = 0.1
     tangential_tolerance = 1e-1
   []
 []

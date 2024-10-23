@@ -4,7 +4,7 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = ../mesh/2D_r0.e
+fname = mesh/2D_ref0l.e
 
 # substrate refinement
 ref = 0
@@ -290,7 +290,8 @@ refi = 0
     normalize_penalty = true
     formulation = penalty
     # Set penalty lower if solution does not converge
-    penalty = 1e4
+    penalty = 5e3#1e4
+    normal_smoothing_distance = 0.1
     tangential_tolerance = 1e-1
   []
   # [ind_base] # Frictionless

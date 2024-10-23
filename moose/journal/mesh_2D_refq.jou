@@ -20,12 +20,15 @@ sideset 2 curve 3 4 # Indenter bottom
 sideset 3 curve 5 # Indenter left
 
 surface 1 size 0.3
+curve 4 interval 1
+curve 3 size 0.2
 create block 1
 block 1 add surface 1
 #surface 1 scheme trimesh
 
+surface 1 scheme pave
 mesh surface 1 smooth
-refine curve 4 smooth
+$refine curve 4 smooth
 block 1 element type quad8
 
 create vertex 0 0 0
@@ -38,21 +41,24 @@ create curve vertex 14 15
 create curve vertex 15 12
 create surface curve 6 7 8 9
 
-sideset 4 curve 6 # Specimen top
-sideset 5 curve 7 # Specimen right
-sideset 6 curve 8 # Specimen bottom
-sideset 7 curve 9 # Specimen left
+webcut surface 2 plane xplane offset 1.2
+webcut surface all plane yplane offset -1.2
+merge volume 5 4 3 2 
 
-surface 2 size 0.5
+sideset 4 curve 11 15 # Substrate top
+sideset 5 curve 21 17 # Substrate right
+sideset 6 curve 14 12 # Substrate bottom
+sideset 7 curve 26 24 # Substrate left
+
+surface 6 7 5 size 0.3
+surface 8 size 0.07 #That gives a size of 0.15 for some reason
 create block 2
-block 2 add surface 2
+block 2 add surface 8 6 7 5
 #surface 2 scheme trimesh
 
 move volume 1 x 0 y 1 z 0
-mesh surface 2
-refine vertex 12 radius 0.5
-refine vertex 12 radius 0.8
-refine vertex 12 radius 1
+mesh surface 8 6 7 5
+#refine vertex 12 radius 0.5 numsplit 3
 move volume 1 x 0 y -1 z 0
 block 2 element type quad8
 export genesis "~/GitHub/NN_indentation/moose/mesh/2D_ref0q.e" dimension 3 overwrite

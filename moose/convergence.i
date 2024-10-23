@@ -6,21 +6,21 @@ c = 1e9
 l = 0.5
 A = 1
 
-current_refine = toyproblemq2.e
+current_refine = outputs/notchpeak_refined/2D_l_0_0.e
 
-most_refined = toyproblemq7.e
-second_refined = toyproblemq6.e
-ref_refine = toyproblemq7.e
+most_refined = outputs/notchpeak_refined/2D_l_4_4.e
+second_refined = outputs/notchpeak_refined/2D_l_4_4.e
+ref_refine = ind_2D_l_in.e#outputs/notchpeak_refined/2D_l_4_4.e
 
 
 [Mesh]
   # This is the input or output mesh for whichever refinement level you want to integrate
   file = ${ref_refine}
-  block = 1#'1 2'
+  block = '1 2'
 []
 
 [GlobalParams]
-  order = SECOND
+  order = FIRST
   family = LAGRANGE
 []
 
@@ -138,12 +138,12 @@ ref_refine = toyproblemq7.e
   [rich_top]
     type = ElementIntegralMaterialProperty
     mat_prop = toperror
-    block = 1#'1 2'
+    block = '1 2'
   []
   [rich_bottom]
     type = ElementIntegralMaterialProperty
     mat_prop = bottomerror
-    block = 1#'1 2'
+    block = '1 2'
   []
   [rich_normal]
     type = ParsedPostprocessor
