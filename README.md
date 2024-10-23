@@ -10,13 +10,13 @@ The data used in this work can be found in the [data](data) folder. The data was
 All code is contained in the [src](src) folder. A summary of each file is provided below:
 - The code for the neural network and multi-fidelity neural networks is located in [nn.py](src/nn.py).
 - The function used to read indentation data from a file and convert it to the program format when needed is found in [data.py](src/data.py).
-- Multiple functions can be performed in parallel with [runmultiple.py](src/runmultiple.py) to speed up processing time.
-- Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [fitting.py](src/fitting.py). The yield and plastic stress files must be cleared before a new yield dataset can be calculated.
+- Multiple functions can be performed in parallel using [runmultiple.py](src/runmultiple.py) to speed up executaion.
+- Fitting functions developed by [Chollacoop et al.](https://doi.org/10.1016/S1359-6454(03)00186-1) were used in [fitting.py](src/fitting.py) to find the alloy's mechanical properties. Yield and plastic stress files must be cleared before a new yield dataset can be calculated.
 - If a different indenter geometry is desired, the required dimensions can be determined using [dimensions.py](src/dimensions.py).
 
 Besides some Python packages listed in [requirements.txt](src/requirements.txt), the following packages are required to use the neural network.
-- [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` is used, with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
-- [Keras](https://keras.io/) `v2.15.0` is used. DeepXDE will not work with newer versions of Keras like v3.
+- [DeepXDE](https://github.com/lululxvi/deepxde) `v1.11.1` with `tensorflow.compat.v1` set as its backend. Some DeepXDE functions may need to be modified if a different version is used.
+- [Keras](https://keras.io/) `v2.15.0`. DeepXDE will not work with newer versions of Keras like v3.
 - [TensorFlow](https://www.tensorflow.org/) `v2.15.0`, with `tensorflow-probability==0.23.0` (see this DeepXDE [Git issue](https://github.com/lululxvi/deepxde/issues/1682)).
 
 ## Finite element method
