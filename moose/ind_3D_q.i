@@ -233,12 +233,12 @@ refi = 0
   #   sync_only = true
   #   num_files = 1
   # []
-  [csv] # This makes a smaller exodus file with only three points of interest
-    type = CSV
-    sync_times = '1.0 1.01 1.5'
-    sync_only = true
-  []
-  # csv = true
+  # [csv] # This makes a smaller exodus file with only three points of interest
+  #   type = CSV
+  #   sync_times = '1.0 1.01 1.5'
+  #   sync_only = true
+  # []
+  csv = true
   print_linear_residuals = true
   print_perf_log = true
   [console]

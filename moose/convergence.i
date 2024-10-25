@@ -6,11 +6,11 @@ c = 1e9
 l = 0.5
 A = 1
 
-current_refine = outputs/notchpeak_refined/2D_l_0_0.e
+current_refine = outputs/notchpeak_refined/2D_q_0_0.e
 
-most_refined = outputs/notchpeak_refined/2D_l_4_4.e
-second_refined = outputs/notchpeak_refined/2D_l_4_4.e
-ref_refine = ind_2D_l_in.e#outputs/notchpeak_refined/2D_l_4_4.e
+most_refined = outputs/notchpeak_refined/2D_q_5_5.e
+second_refined = outputs/notchpeak_refined/2D_q_4_4.e
+ref_refine = ind_2D_q_in.e
 
 
 [Mesh]

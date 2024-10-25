@@ -4,7 +4,7 @@ n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
 
-fname = mesh/2D_ref0l.e
+fname = mesh/2D_r0.e
 
 # substrate refinement
 ref = 0
@@ -245,12 +245,12 @@ refi = 0
   #   sync_only = true
   #   num_files = 1
   # []
-  [csv] # This makes a smaller exodus file with only three points of interest
-    type = CSV
-    sync_times = '1.0 1.01 1.5'
-    sync_only = true
-  []
-  # csv = true
+  # [csv] # This makes a smaller exodus file with only three points of interest
+  #   type = CSV
+  #   sync_times = '1.0 1.01 1.5'
+  #   sync_only = true
+  # []
+  csv = true
   print_linear_residuals = true
   print_perf_log = true
   [console]
