@@ -1,12 +1,12 @@
-E = 200e9
+name = '1'
+E = 200
 nu = 0.3
-c = 1e9
-l = 0.5
+# b = 100
+tb = 100
 A = 1
 ref = 0
 
 [Mesh]
-  # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [mesh]
     type = FileMeshGenerator
     file = outputs/toyproblem/toy_mesh_l0.e
@@ -14,7 +14,7 @@ ref = 0
   [refine]
     type = RefineBlockGenerator
     input = mesh
-    block = 1#'1 2'
+    block = 1
     refinement = ${ref}
   []
 []
@@ -67,23 +67,22 @@ ref = 0
   []
 []
 
-[VectorPostprocessors]
-  [y_disp]
-    type = NodalValueSampler
-    variable = disp_y
-    sort_by = y
-  []
-[]
-
 [Functions]
   # [body_force]
   #   type = ParsedFunction
-  #   value = '${c}*y*t'
+  #   # Constant body load
+  #   # value = '${b}*t'
+  #   # Varied body load
+  #   value = '${b}*y*t'
   # []
   [exact] # For use in calculating the exact solution for the toy problem
-    # c=1e8, l=0.5, A=1, E=200e9
     type = ParsedFunction
-    expression = '(${c}/(${E}*${A}))*(-(y^3)/6+y*${l}^2)'
+    # Compression test
+    expression = '(1-${nu}^2)/(${A}*${E})*-y*${tb}'
+    # Constant body load
+    # expression = '(1/(${E}*${A}))*((-((y)^2)*${b}/2))'
+    # Linearly varying load
+    # expression = '(1/(${E}*${A}))*((-((y)^3)*${b}/6)-(y*${tb}/2))'
   []
 []
 
@@ -102,6 +101,7 @@ ref = 0
 []
 
 [BCs]
+  # Boundaries: left = 1, top = 2, right = 3, bottom = 4, corner = 5
   [bottom_y]
     type = DirichletBC
     variable = disp_y
@@ -111,7 +111,7 @@ ref = 0
   [bottom_x]
     type = DirichletBC
     variable = disp_x
-    # Use boundary 5 for pin, boundary 4 for glued
+    # Use boundary 5 for pin, boundary 4 for glued, boundary 1, 3, 4 for fixed at three ends.
     boundary = 5
     value = 0
   []
@@ -119,20 +119,8 @@ ref = 0
     type = FunctionNeumannBC
     variable = disp_y
     boundary = 2
-    function = '-1e8*t'
+    function = '-${tb}*t'
   []
-  # [top_y] # Linearly varied axial load case
-  #   type = FunctionNeumannBC
-  #   variable = disp_y
-  #   boundary = 2
-  #   function = '-2e8*t*x'
-  # []
-  # [top_y] # Fish book problem. c=1e8, l=0.5, A=1
-  #   type = FunctionNeumannBC
-  #   variable = disp_y
-  #   boundary = 2
-  #   function = '-${c}*((${l}^2)/${A})*t'
-  # []
 []
 
 [Materials]
@@ -155,11 +143,17 @@ ref = 0
   dt = 1.0
   end_time = 1.0
   solve_type = PJFNK
+  # petsc_options_iname = '-pc_type -pc_factor_mat_solver_package'
+  # petsc_options_value = 'lu mumps'
   petsc_options_iname = '-pc_type -pc_hypre_type'
   petsc_options_value = 'hypre boomeramg'
+  # solve_type = NEWTON
+  # petsc_options_iname = '-pc_type -ksp_type'
+  # petsc_options_value = 'asm gmres'
 []
 
 [Outputs]
   exodus = true
-  csv = true
+  # csv = true
+  file_base = 'toyproblem_${name}_${ref}'
 []

@@ -5,6 +5,7 @@ hm = 0.226 #0.226
 nu = 0.25
 
 fname = mesh/3D_r0.e
+suffix = ''
 
 # substrate refinement
 ref = 0
@@ -261,7 +262,7 @@ refi = 0
     max_rows = 5
   []
   # set file_base to choose what it's named
-  file_base = '3D_l_${refi}_${ref}'
+  file_base = '3D_l_${refi}_${ref}${suffix}'
 []
 
 [Preconditioning]

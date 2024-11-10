@@ -54,4 +54,4 @@ sideset 8 surface 99 95 # Indenter top
 create block 2
 block 2 add volume 11 12
 block 2 element type hex27
-export genesis "~/GitHub/NN_indentation/moose/mesh/3D_r0.e" dimension 3 overwrite
+#export genesis "~/GitHub/NN_indentation/moose/mesh/3D_r0.e" dimension 3 overwrite

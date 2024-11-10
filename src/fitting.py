@@ -55,7 +55,7 @@ def model_dao(C, dPdh, nu, Er, hm, hr, nu_i=0.0691, E_i=1143):
         sigma_y = sigma_33
     return sigma_y/1e9, n
 
-def model_cho(C, dPdh, nu, Er, hm, hr, theta=70.3, nu_i=0.0691, E_i=1143, typ='b'):
+def model_cho(C, dPdh, nu, Er, hm, hr, theta=70.296, nu_i=0.0691, E_i=1143, typ='b'):
     # This model is only valid with θ=70.3˚. Please refer to Chollacoop et al for more information.
     C *= 1e9
     E_i *= 1e9
@@ -97,7 +97,7 @@ def model_cho(C, dPdh, nu, Er, hm, hr, theta=70.3, nu_i=0.0691, E_i=1143, typ='b
     else:
         n = 0
         sigma_y = (sigma_33 + sigma_r) / 2
-    return E/1e9,Er/1e9, sigma_y/1e9, n
+    return E/1e9, Er/1e9, sigma_y/1e9, n
 
 
 

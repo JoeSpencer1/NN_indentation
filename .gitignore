@@ -11,3 +11,4 @@ moose/convergence_out_cp
 moose/.jitcache/
 moose/ind_2D_out.csv
 moose/ind_3D_out.csv
+*.pdf

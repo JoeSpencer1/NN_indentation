@@ -1,22 +1,22 @@
-h_1 = 0.0078125
-h_2 = 0.015625
+h_1 = 1
+h_2 = 2
 
-E = 200e9
-c = 1e9
-l = 0.5
-A = 1
+# E = 200
+# c = 1
+# l = 0.5
+# A = 1
 
-current_refine = outputs/notchpeak_refined/2D_q_0_0.e
+current_refine = toyproblem_1_0.e
 
-most_refined = outputs/notchpeak_refined/2D_q_5_5.e
-second_refined = outputs/notchpeak_refined/2D_q_4_4.e
-ref_refine = ind_2D_q_in.e
+most_refined = toyproblem_1_6.e
+second_refined = toyproblem_1_5.e
+ref_refine = toyproblem_1_6.e
 
 
 [Mesh]
   # This is the input or output mesh for whichever refinement level you want to integrate
   file = ${ref_refine}
-  block = '1 2'
+  block = 1
 []
 
 [GlobalParams]
@@ -91,31 +91,31 @@ ref_refine = ind_2D_q_in.e
     from_variable = 'disp_y'
   []
 
-  [exact] # For use in calculating the exact solution for the toy problem
-    # c=1e8, l=0.5, A=1, E=200e9
-    type = ParsedFunction
-    expression = '(${c}/(${E}*${A}))*(-(y^3)/6+y*${l}^2)'
-  []
+  # [exact] # For use in calculating the exact solution for the toy problem
+  #   # c=1e8, l=0.5, A=1, E=200e9
+  #   type = ParsedFunction
+  #   expression = '(${c}/(${E}*${A}))*(-(y^3)/6+y*${l}^2)'
+  # []
 []
 
 [UserObjects]
   [solution_1]
     type = SolutionUserObject
-    system_variables = 'disp_x disp_y'
+    system_variables = disp_y#'disp_x disp_y'
     # system_variables = 'disp_x disp_y disp_z'
     # This is the output mesh with the most refined solution
     mesh = ${most_refined}
   []
   [solution_2]
     type = SolutionUserObject
-    system_variables = 'disp_x disp_y'
+    system_variables = disp_y#'disp_x disp_y'
     # system_variables = 'disp_x disp_y disp_z'
     # This is the output mesh with the second most refined solution
     mesh = ${second_refined}
   []
   [solution_n]
     type = SolutionUserObject
-    system_variables = 'disp_x disp_y'
+    system_variables = disp_y#'disp_x disp_y'
     # system_variables = 'disp_x disp_y disp_z'
     # This is the output mesh with the nth refined solution that you compute the error on
     mesh = ${current_refine}
@@ -138,29 +138,29 @@ ref_refine = ind_2D_q_in.e
   [rich_top]
     type = ElementIntegralMaterialProperty
     mat_prop = toperror
-    block = '1 2'
+    block = 1
   []
   [rich_bottom]
     type = ElementIntegralMaterialProperty
     mat_prop = bottomerror
-    block = '1 2'
+    block = 1
   []
   [rich_normal]
     type = ParsedPostprocessor
     function = 'sqrt(rich_top/rich_bottom)'
     pp_names = 'rich_top rich_bottom'
   []
-  [rich_error]
+  [_rich_error]
     type = ParsedPostprocessor
     function = 'sqrt(rich_top)'
     pp_names = 'rich_top rich_bottom'
   []
 
-  [error]
-    type = ElementL2Error
-    variable = disp_y_n
-    function = exact
-  []
+  # [error]
+  #   type = ElementL2Error
+  #   variable = disp_y_n
+  #   function = exact
+  # []
 []
 
 [VectorPostprocessors]
