@@ -34,6 +34,7 @@ def epsilon_r(theta):
     return 2.397e-5 * theta ** 2 - 5.311e-3 * theta + 0.2884
 
 def model_dao(C, dPdh, nu, Er, hm, hr, nu_i=0.0691, E_i=1143):
+    # This model is only valid with θ=70.3˚. Please refer to https://doi.org/10.1016/S1359-6454(01)00295-6 for more information.
     C *= 1e9
     hm *= 1e-6
     hr *= 1e-6
@@ -56,7 +57,6 @@ def model_dao(C, dPdh, nu, Er, hm, hr, nu_i=0.0691, E_i=1143):
     return sigma_y/1e9, n
 
 def model_cho(C, dPdh, nu, Er, hm, hr, theta=70.296, nu_i=0.0691, E_i=1143, typ='b'):
-    # This model is only valid with θ=70.3˚. Please refer to Chollacoop et al for more information.
     C *= 1e9
     E_i *= 1e9
     Er *= 1e9
@@ -102,10 +102,7 @@ def model_cho(C, dPdh, nu, Er, hm, hr, theta=70.296, nu_i=0.0691, E_i=1143, typ=
 
 
 
-#print(model_old(204.8761345, 188141.7926, 0.25, 151, 0.220941158, 0.025171))
-#print(model_new(204.8761345, 0.25, 151, 0.220941158))
 filename = '../data/TI33_25.csv'
-# filename = '../data/B3090.csv'
 df = pd.read_csv(filename)
 print('New')
 for i in range(len(df)):

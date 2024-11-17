@@ -23,9 +23,9 @@ Besides some Python packages listed in [requirements.txt](src/requirements.txt),
 Finite element method (FEM) simulations were performed usinng the Multi-physics object oriented simulation environt ([MOOSE](https://mooseframework.inl.gov/)) with some specific configurations. Files used in these simulations can be found in the [moose](moose) folder.
 - MOOSE was installed in a separate environment using the software's documented [installation instructions](https://mooseframework.inl.gov/releases/moose/2021-09-15/getting_started/installation/). 
 - [Volumetric locking](https://mooseframework.inl.gov/modules/solid_mechanics/VolumetricLocking.html) correction is needed in the \[GlobalParams\] block for simulations with first-order shape functions and should be commented for second-order simulations.
-- Contact problems like this can be executed using different executables, including custom executables, `combined-opt`, or `~/projects/moose/modules/contact/contact-opt`. For example, to execute `ind_2D_l.i` with custom values of 3 and 2 for the `ref` and `refi` refinement variables, run
+- Contact problems like this can be executed using different executables, including custom executables, `combined-opt`, or `~/projects/moose/modules/contact/contact-opt`. For example, to execute `ind_2D_l.i` with custom values for the `ref`, `refi`, `hm`, `E`, `K`, and `n` variables, run
 ```
-mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D_l.i -input-params ref=3 refi=2
+mpiexec -n 4 ~/projects/moose/modules/contact/contact-opt -i ind_2D_l.i --input params ref=3 refi=1 hm=0.187 E=230 K=7.78 n=0.082
 ```
 - To accurately integrate the $`\text{L}^2`$ error over quadratic meshes, modify the `framework/src/userobjects/SolutionUserObject.C` file in the MOOSE installation. For second-order meshes, MOOSE was recompiled with the variable orders on lines 314 and 335 of `SolutionUserObject.C` changed from `FIRST` to `SECOND`.
 

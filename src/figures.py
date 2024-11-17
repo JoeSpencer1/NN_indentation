@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 ''''''''''''''''''''''''''''''''''''''''''''''''
-df = pd.read_csv('../data/experiment/compare.csv', skiprows=1)
+df = pd.read_csv('../data/experiment/compare.csv', skiprows=0)
 fig, ax = plt.subplots()
 ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
 ax.plot(df['Depth0 (nm)'], df['Load0 (uN)'], linewidth=0.3, color='gray', zorder=1)
@@ -30,22 +30,32 @@ ax.plot(df['Depth21 (nm)'], df['Load21 (uN)'], color='gray', linewidth=0.3, zord
 ax.plot(df['Depth22 (nm)'], df['Load22 (uN)'], color='gray', linewidth=0.3, zorder=1)
 ax.plot(df['Depth23 (nm)'], df['Load23 (uN)'], color='gray', linewidth=0.3, zorder=1)
 ax.plot(df['Depth24 (nm)'], df['Load24 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.scatter(df['disp_y_3D']*-1e3, df['react_y_3D']*-6e3, color='blue', marker='.', zorder=2, label='3D model')
-#ax.scatter(df['hm (nm)'], df['F (uN)'], color='blue', marker='.', zorder=2, label='Old 3D model')
-#ax.scatter(df['h3D']*-1000, df['F3D'], color='green', marker='s', zorder=3, s = 10, label='New 3D model')
-ax.scatter(df['disp_y_2D']*-1e3, df['react_y_2D']*-1e3, color='red', marker='*', zorder=3, s = 10, label='2D model')
-#ax.scatter(df['Depth']*1000, df['Force'], color='red', marker='*', zorder=3, s = 10, label='Old 2D model')
-#ax.scatter(df['Depth']*1000, df['Force'], color='red', marker='*', zorder=3, s = 10, label='Old 2D model')
-#ax.set_xlabel('Indenter depth (nm)')
+ax.scatter(df['disp_y_3Da']*-1e3, df['react_y_3Da']*-6e3, color='blue', marker='.', zorder=2, label='3D model')
+ax.scatter(df['disp_y_3Db']*-1e3, df['react_y_3Db']*-6e3, color='blue', marker='.', zorder=2)
+leftmost_x = df['disp_y_3Da'].iloc[75] * -1e3
+leftmost_y = df.loc[df['disp_y_3Da'] == df['disp_y_3Da'].iloc[75], 'react_y_3Da'].values[0] * -6e3
+ax.annotate('σ Ta$_2$Al', 
+            xy=(leftmost_x, leftmost_y),  
+            xytext=(-120, -10),  
+            textcoords='offset points',
+            fontsize=12,
+            arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=-0.2'))
+ax.scatter(df['disp_y_2Da']*-1e3, df['react_y_2Da']*-1e3, color='red', marker='*', zorder=3, s = 10, label='2D model')
+ax.scatter(df['disp_y_2Db']*-1e3, df['react_y_2Db']*-1e3, color='red', marker='*', zorder=3, s = 10)
+leftmost_x = df['disp_y_3Db'].iloc[75] * -1e3
+leftmost_y = df.loc[df['disp_y_3Db'] == df['disp_y_3Db'].iloc[75], 'react_y_3Da'].values[0] * -6e3
+ax.annotate('β TiAl', 
+            xy=(leftmost_x, leftmost_y),  
+            xytext=(80, -10),  
+            textcoords='offset points',
+            fontsize=12,
+            arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=-0.2'))
 ax.set_xlabel('Indenter depth (nm)', fontsize=14)
 ax.set_xlim([0, 275])
-#ax.set_ylabel('Load (μN)')
 ax.set_ylabel('Load (μN)', fontsize=14)
 ax.set_ylim([0, 11000])
 ax.grid(False)
 leg = ax.legend(fontsize=14)
-#leg = ax.legend(frameon=False)
-#plt.savefig('figures/NN_graphs/R2comp.pdf', dpi=800, bbox_inches="tight")
 plt.savefig('figures/R2comp.pdf', dpi=800, bbox_inches="tight")
 plt.show()
 
@@ -433,45 +443,45 @@ plt.show()
 # plt.savefig('figures/2D_convergence.pdf', dpi=800, bbox_inches="tight")
 # plt.show()
 
-# 3D simulations convergence study
-fx = [0.01, 1.5]
-Blx = [0.6, 0.3, 0.15, 0.075]
-Bly = [4.517967e-03, 1.699994e-03, 6.588679e-04, 2.967900e-04]
-Bqx = [0.6, 0.3, 0.15]
-Bqy = [1.486733e-03, 4.943362e-04, 2.099142e-04]
+# # 3D simulations convergence study
+# fx = [0.01, 1.5]
+# Blx = [0.6, 0.3, 0.15, 0.075]
+# Bly = [4.517967e-03, 1.699994e-03, 6.588679e-04, 2.967900e-04]
+# Bqx = [0.6, 0.3, 0.15]
+# Bqy = [1.486733e-03, 4.943362e-04, 2.099142e-04]
 
-def equation(x, y, eqx):
-    l = len(x) - 1
-    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
-    C = 0
-    for i in range(len(x)):
-        C += (1/len(x))*y[i]/(x[i]**p)
-    print('C = ', C)
-    print('p = ', p)
-    eqy = [0, 0]
-    for i in range(2):
-        eqy[i] = C * eqx[i] ** p
-    return eqy
-f70l = equation(Blx, Bly, fx)
-f70q = equation(Bqx, Bqy, fx)
+# def equation(x, y, eqx):
+#     l = len(x) - 1
+#     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+#     C = 0
+#     for i in range(len(x)):
+#         C += (1/len(x))*y[i]/(x[i]**p)
+#     print('C = ', C)
+#     print('p = ', p)
+#     eqy = [0, 0]
+#     for i in range(2):
+#         eqy[i] = C * eqx[i] ** p
+#     return eqy
+# f70l = equation(Blx, Bly, fx)
+# f70q = equation(Bqx, Bqy, fx)
 
-fig, ax = plt.subplots()
-ax.scatter(Blx, Bly, color='gray', marker='o', label='Linear 3D: $||e||_{L_{2}}=(8.34\\cdot10^{-3})h^{1.31}$')
-ax.scatter(Bqx, Bqy, color='blue', marker='o', label='Quadratic 3D: $||e||_{L_{2}}=(2.94\\cdot10^{-3})h^{1.41}$')
-ax.plot(fx, f70l, linestyle="--", color='gray')
-ax.plot(fx, f70q, linestyle="--", color='blue')
-ax.plot()
-ax.set_xlabel('Element length (m)')
-ax.set_xscale('log')
-ax.set_xlim([0.05, 1.2])
-ax.set_ylabel('L$^{2}$ error')
-ax.set_yscale('log')
-ax.set_ylim([1e-5, 1e-1])
-ax.grid(False)
-leg = ax.legend(loc='lower right', frameon=False)
-leg.set_title('Element order')
-plt.savefig('figures/3D_convergence.pdf', dpi=800, bbox_inches="tight")
-plt.show()
+# fig, ax = plt.subplots()
+# ax.scatter(Blx, Bly, color='gray', marker='o', label='Linear 3D: $||e||_{L_{2}}=(8.34\\cdot10^{-3})h^{1.31}$')
+# ax.scatter(Bqx, Bqy, color='blue', marker='o', label='Quadratic 3D: $||e||_{L_{2}}=(2.94\\cdot10^{-3})h^{1.41}$')
+# ax.plot(fx, f70l, linestyle="--", color='gray')
+# ax.plot(fx, f70q, linestyle="--", color='blue')
+# ax.plot()
+# ax.set_xlabel('Element length (m)')
+# ax.set_xscale('log')
+# ax.set_xlim([0.05, 1.2])
+# ax.set_ylabel('L$^{2}$ error')
+# ax.set_yscale('log')
+# ax.set_ylim([1e-5, 1e-1])
+# ax.grid(False)
+# leg = ax.legend(loc='lower right', frameon=False)
+# leg.set_title('Element order')
+# plt.savefig('figures/3D_convergence.pdf', dpi=800, bbox_inches="tight")
+# plt.show()
 
 # # NN trained using only Exp data
 # n = [2, 3, 4, 5, 6, 8, 10, 15]
