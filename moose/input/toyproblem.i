@@ -9,7 +9,7 @@ ref = 0
 [Mesh]
   [mesh]
     type = FileMeshGenerator
-    file = outputs/toyproblem/toy_mesh_l0.e
+    file = ../outputs/toyproblem/toy_mesh_l0.e
   []
   [refine]
     type = RefineBlockGenerator

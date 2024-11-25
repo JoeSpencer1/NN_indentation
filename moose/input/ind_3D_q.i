@@ -1,8 +1,9 @@
 E =  139 #139
-K =  7.26 #7.26
+sy = 3.61
 n =  0.195 #0.195
 hm = 0.226 #0.226
 nu = 0.25
+K = ${fparse sy / (sy/E)^n} # K calculated from sy/E and n
 
 fname = mesh/3D_r0.e
 suffix = ''
@@ -14,8 +15,7 @@ refi = 0
 
 [GlobalParams]
   displacements = 'disp_x disp_y disp_z'
-  volumetric_locking_correction = true
-  order = FIRST
+  order = SECOND
   family = LAGRANGE
 []
   
@@ -29,11 +29,6 @@ refi = 0
     input = initial
     block = '1 2'
     refinement = '${ref} ${refi}'
-  []
-  [convert_to_linear]
-    type = ElementOrderConversionGenerator
-    input = refine
-    conversion_type = FIRST_ORDER
   []
 []
   
@@ -54,7 +49,7 @@ refi = 0
   [saved_z]
   []
   [effective_plastic_strain]
-    order = FIRST
+    order = SECOND
     family = MONOMIAL
   []
   [SED]
@@ -87,7 +82,7 @@ refi = 0
     strain = FINITE
     block = '1 2'
     generate_output = 'stress_xx stress_xy stress_xz stress_yy stress_zz vonmises_stress'
-    material_output_order = FIRST
+    material_output_order = SECOND
     save_in = 'saved_x saved_y saved_z'
   []
 []
@@ -200,15 +195,6 @@ refi = 0
     block = '1 2'
   []
 []
-
-# [VectorPostprocessors]
-#   [y_disp]
-#     type = NodalValueSampler
-#     variable = disp_y
-#     block = '1'
-#     sort_by = x
-#   []
-# []
   
 [Executioner]
   type = Transient
@@ -243,7 +229,7 @@ refi = 0
     sync_only = true
   []
   # exodus = true
-  # [checkpoint] # This keeps the checkpoint from forming 
+  # [checkpoint] # This keeps the checkpoint from forming
   #   type = Checkpoint
   #   sync_times = ''
   #   sync_only = true
@@ -262,7 +248,7 @@ refi = 0
     max_rows = 5
   []
   # set file_base to choose what it's named
-  file_base = '3D_l_${refi}_${ref}${suffix}'
+  file_base = '3D_q_${refi}_${ref}${suffix}'
 []
 
 [Preconditioning]

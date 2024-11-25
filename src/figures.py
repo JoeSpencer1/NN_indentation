@@ -3,61 +3,61 @@ import numpy as np
 import pandas as pd
 
 ''''''''''''''''''''''''''''''''''''''''''''''''
-df = pd.read_csv('../data/experiment/compare.csv', skiprows=0)
-fig, ax = plt.subplots()
-ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
-ax.plot(df['Depth0 (nm)'], df['Load0 (uN)'], linewidth=0.3, color='gray', zorder=1)
-ax.plot(df['Depth2 (nm)'], df['Load2 (uN)'], linewidth=0.3, color='gray', zorder=1)
-ax.plot(df['Depth3 (nm)'], df['Load3 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth4 (nm)'], df['Load4 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth5 (nm)'], df['Load5 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth6 (nm)'], df['Load6 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth7 (nm)'], df['Load7 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth8 (nm)'], df['Load8 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth9 (nm)'], df['Load9 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth10 (nm)'], df['Load10 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth11 (nm)'], df['Load11 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth12 (nm)'], df['Load12 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth13 (nm)'], df['Load13 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth14 (nm)'], df['Load14 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth15 (nm)'], df['Load15 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth16 (nm)'], df['Load16 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth17 (nm)'], df['Load17 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth18 (nm)'], df['Load18 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth19 (nm)'], df['Load19 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth20 (nm)'], df['Load20 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth21 (nm)'], df['Load21 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth22 (nm)'], df['Load22 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth23 (nm)'], df['Load23 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.plot(df['Depth24 (nm)'], df['Load24 (uN)'], color='gray', linewidth=0.3, zorder=1)
-ax.scatter(df['disp_y_3Da']*-1e3, df['react_y_3Da']*-6e3, color='blue', marker='.', zorder=2, label='3D model')
-ax.scatter(df['disp_y_3Db']*-1e3, df['react_y_3Db']*-6e3, color='blue', marker='.', zorder=2)
-leftmost_x = df['disp_y_3Da'].iloc[75] * -1e3
-leftmost_y = df.loc[df['disp_y_3Da'] == df['disp_y_3Da'].iloc[75], 'react_y_3Da'].values[0] * -6e3
-ax.annotate('σ Ta$_2$Al', 
-            xy=(leftmost_x, leftmost_y),  
-            xytext=(-120, -10),  
-            textcoords='offset points',
-            fontsize=12,
-            arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=-0.2'))
-ax.scatter(df['disp_y_2Da']*-1e3, df['react_y_2Da']*-1e3, color='red', marker='*', zorder=3, s = 10, label='2D model')
-ax.scatter(df['disp_y_2Db']*-1e3, df['react_y_2Db']*-1e3, color='red', marker='*', zorder=3, s = 10)
-leftmost_x = df['disp_y_3Db'].iloc[75] * -1e3
-leftmost_y = df.loc[df['disp_y_3Db'] == df['disp_y_3Db'].iloc[75], 'react_y_3Da'].values[0] * -6e3
-ax.annotate('β TiAl', 
-            xy=(leftmost_x, leftmost_y),  
-            xytext=(80, -10),  
-            textcoords='offset points',
-            fontsize=12,
-            arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=-0.2'))
-ax.set_xlabel('Indenter depth (nm)', fontsize=14)
-ax.set_xlim([0, 275])
-ax.set_ylabel('Load (μN)', fontsize=14)
-ax.set_ylim([0, 11000])
-ax.grid(False)
-leg = ax.legend(fontsize=14)
-plt.savefig('figures/R2comp.pdf', dpi=800, bbox_inches="tight")
-plt.show()
+# df = pd.read_csv('../data/experiment/compare.csv', skiprows=0)
+# fig, ax = plt.subplots()
+# ax.plot(df['Depth (nm)'], df['Load (uN)'], linewidth=0.3, color='gray', zorder=1, label='Experimental results')
+# ax.plot(df['Depth0 (nm)'], df['Load0 (uN)'], linewidth=0.3, color='gray', zorder=1)
+# ax.plot(df['Depth2 (nm)'], df['Load2 (uN)'], linewidth=0.3, color='gray', zorder=1)
+# ax.plot(df['Depth3 (nm)'], df['Load3 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth4 (nm)'], df['Load4 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth5 (nm)'], df['Load5 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth6 (nm)'], df['Load6 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth7 (nm)'], df['Load7 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth8 (nm)'], df['Load8 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth9 (nm)'], df['Load9 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth10 (nm)'], df['Load10 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth11 (nm)'], df['Load11 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth12 (nm)'], df['Load12 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth13 (nm)'], df['Load13 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth14 (nm)'], df['Load14 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth15 (nm)'], df['Load15 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth16 (nm)'], df['Load16 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth17 (nm)'], df['Load17 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth18 (nm)'], df['Load18 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth19 (nm)'], df['Load19 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth20 (nm)'], df['Load20 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth21 (nm)'], df['Load21 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth22 (nm)'], df['Load22 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth23 (nm)'], df['Load23 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.plot(df['Depth24 (nm)'], df['Load24 (uN)'], color='gray', linewidth=0.3, zorder=1)
+# ax.scatter(df['disp_y_3Da']*-1e3, df['react_y_3Da']*-6e3, color='blue', marker='.', zorder=2, label='3D model')
+# ax.scatter(df['disp_y_3Db']*-1e3, df['react_y_3Db']*-6e3, color='blue', marker='.', zorder=2)
+# leftmost_x = df['disp_y_3Da'].iloc[75] * -1e3
+# leftmost_y = df.loc[df['disp_y_3Da'] == df['disp_y_3Da'].iloc[75], 'react_y_3Da'].values[0] * -6e3
+# ax.annotate('σ Ta$_2$Al', 
+#             xy=(leftmost_x, leftmost_y),  
+#             xytext=(-120, -10),  
+#             textcoords='offset points',
+#             fontsize=12,
+#             arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=-0.2'))
+# ax.scatter(df['disp_y_2Da']*-1e3, df['react_y_2Da']*-1e3, color='red', marker='*', zorder=3, s = 10, label='2D model')
+# ax.scatter(df['disp_y_2Db']*-1e3, df['react_y_2Db']*-1e3, color='red', marker='*', zorder=3, s = 10)
+# leftmost_x = df['disp_y_3Db'].iloc[75] * -1e3
+# leftmost_y = df.loc[df['disp_y_3Db'] == df['disp_y_3Db'].iloc[75], 'react_y_3Da'].values[0] * -6e3
+# ax.annotate('β TiAl', 
+#             xy=(leftmost_x, leftmost_y),  
+#             xytext=(80, -10),  
+#             textcoords='offset points',
+#             fontsize=12,
+#             arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=-0.2'))
+# ax.set_xlabel('Indenter depth (nm)', fontsize=14)
+# ax.set_xlim([0, 275])
+# ax.set_ylabel('Load (μN)', fontsize=14)
+# ax.set_ylim([0, 11000])
+# ax.grid(False)
+# leg = ax.legend(fontsize=14)
+# plt.savefig('figures/R2comp.pdf', dpi=800, bbox_inches="tight")
+# plt.show()
 
 # # Old ANSYS convergence study
 # Bqx = [0.5, 0.25, 0.125]
@@ -111,257 +111,257 @@ plt.show()
 # plt.savefig('figures/linqd2D.pdf', dpi=800, bbox_inches="tight")
 # plt.show()
 
-# # Toy problem convergence study
-# fx = [0.01, 1.5]
-# complx = [1, 0.5, 0.25, 0.125, 0.0625]
-# comply = [4.31E-10, 7.79E-13, 3.32E-12, 2.77E-12, 9.85E-12]
-# compqx = [1, 0.5, 0.25, 0.125, 0.0625]
-# compqy = [1.19E-12, 2.26E-12, 5.60E-12, 3.05E-12, 6.38E-12]
+# Toy problem convergence study
+fx = [0.01, 1.5]
+complx = [1, 0.5, 0.25, 0.125, 0.0625]
+comply = [4.31E-10, 7.79E-13, 3.32E-12, 2.77E-12, 9.85E-12]
+compqx = [1, 0.5, 0.25, 0.125, 0.0625]
+compqy = [1.19E-12, 2.26E-12, 5.60E-12, 3.05E-12, 6.38E-12]
 
-# def equation(x, y, eqx):
-#     l = len(x) - 1
-#     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
-#     C = 0
-#     for i in range(5):
-#         C += (1/5)*y[i]/(x[i]**p)
-#     print('C = ', C)
-#     print('p = ', p)
-#     eqy = [0, 0]
-#     for i in range(2):
-#         eqy[i] = C * eqx[i] ** p
-#     return eqy
-# f70l = equation(complx, comply, fx)
-# f70q = equation(compqx, compqy, fx)
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(5):
+        C += (1/5)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+f70l = equation(complx, comply, fx)
+f70q = equation(compqx, compqy, fx)
 
-# fig, ax = plt.subplots()
-# ax.scatter(complx, comply, color='gray', facecolors='none', s=150, marker='o', label='Linear 2D: $||e||_{L_{2}}=(1.87\\cdot10^{-10})h^{-1.36}$')
-# ax.scatter(compqx, compqy, color='blue', facecolors='none', s=150, marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(1.43\\cdot10^{-12})h^{-0.61}$')
-# ax.plot(fx, f70l, linestyle="--", color='gray')
-# ax.plot(fx, f70q, linestyle="--", color='blue')
-# ax.plot()
-# ax.set_xlabel('Element length (m)')
-# ax.set_xscale('log')
-# ax.set_xlim([0.05, 1.5])
-# ax.set_ylabel('L$^{2}$ error')
-# ax.set_yscale('log')
-# ax.set_ylim([1e-16, 5e-9])
-# ax.grid(False)
-# leg = ax.legend(loc='lower left', frameon=False)
-# leg.set_title('Element order')
-# plt.savefig('figures/toy_flat_eq.pdf', dpi=800, bbox_inches="tight")
-# plt.show()
+fig, ax = plt.subplots()
+ax.scatter(complx, comply, color='gray', facecolors='none', s=150, marker='o', label='Linear 2D: $||e||_{L_{2}}=(1.87\\cdot10^{-10})h^{1.36}$')
+ax.scatter(compqx, compqy, color='blue', facecolors='none', s=150, marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(1.43\\cdot10^{-12})h^{-0.61}$')
+ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.plot(fx, f70q, linestyle="--", color='blue')
+ax.plot()
+ax.set_xlabel('Element length (m)')
+ax.set_xscale('log')
+ax.set_xlim([0.05, 1.5])
+ax.set_ylabel('L$^{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([1e-16, 5e-9])
+ax.grid(False)
+leg = ax.legend(loc='lower left', frameon=False)
+leg.set_title('Element order')
+plt.savefig('figures/toy_flat_eq.pdf', dpi=800, bbox_inches="tight")
+plt.show()
 
-# # Toy problem convergence study
-# fx = [0.01, 1.5]
-# quadlx = [1, 0.5, 0.25, 0.125, 0.0625]
-# quadly = [3.48E-12, 4.76E-12, 3.48E-12, 3.62E-12, 2.97E-12]
-# quadqx = [1, 0.5, 0.25, 0.125, 0.0625]
-# quadqy = [4.56E-02, 1.14E-02, 2.85E-03, 7.12E-04, 1.77E-04]
+# Toy problem convergence study
+fx = [0.01, 1.5]
+quadlx = [1, 0.5, 0.25, 0.125, 0.0625]
+quadly = [4.56E-02, 1.14E-02, 2.85E-03, 7.12E-04, 1.77E-04]
+quadqx = [1, 0.5, 0.25, 0.125, 0.0625]
+quadqy = [3.48E-12, 4.76E-12, 3.48E-12, 3.62E-12, 2.97E-12]
 
-# def equation(x, y, eqx):
-#     l = len(x) - 1
-#     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
-#     C = 0
-#     for i in range(5):
-#         C += (1/5)*y[i]/(x[i]**p)
-#     print('C = ', C)
-#     print('p = ', p)
-#     eqy = [0, 0]
-#     for i in range(2):
-#         eqy[i] = C * eqx[i] ** p
-#     return eqy
-# f70l = equation(quadlx, quadly, fx)
-# f70q = equation(quadqx, quadqy, fx)
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(5):
+        C += (1/5)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+f70l = equation(quadlx, quadly, fx)
+f70q = equation(quadqx, quadqy, fx)
 
-# fig, ax = plt.subplots()
-# ax.scatter(quadlx, quadly, color='gray', facecolors='none', s=150, marker='o', label='Linear 2D: $||e||_{L^{2}}=(4.57\\cdot10^{-2})h^{2.00}$')
-# ax.scatter(quadqx, quadqy, color='blue', facecolors='none', s=150, marker='d', label='Qadratic 2D: $||e||_{L^{2}}=(3.95\\cdot10^{-13})h^{0.06}$')
-# ax.plot(fx, f70l, linestyle="--", color='gray')
-# ax.plot(fx, f70q, linestyle="--", color='blue')
-# ax.plot()
-# ax.set_xlabel('Element length (m)')
-# ax.set_xscale('log')
-# ax.set_xlim([0.05, 1.5])
-# ax.set_ylabel('L$^{2}$ error')
-# ax.set_yscale('log')
-# ax.set_ylim([5e-14, 1e-1])
-# ax.grid(False)
-# leg = ax.legend(loc='center right', frameon=False)
-# leg.set_title('Element order')
-# plt.savefig('figures/toy_quad_eq.pdf', dpi=800, bbox_inches="tight")
-# plt.show()
+fig, ax = plt.subplots()
+ax.scatter(quadlx, quadly, color='gray', facecolors='none', s=150, marker='o', label='Linear 2D: $||e||_{L^{2}}=(3.95\\cdot10^{-12})h^{2.00}$')
+ax.scatter(quadqx, quadqy, color='blue', facecolors='none', s=150, marker='d', label='Qadratic 2D: $||e||_{L^{2}}=(4.57\\cdot10^{-2})h^{0.06}$')
+ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.plot(fx, f70q, linestyle="--", color='blue')
+ax.plot()
+ax.set_xlabel('Element length (m)')
+ax.set_xscale('log')
+ax.set_xlim([0.05, 1.5])
+ax.set_ylabel('L$^{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([5e-14, 1e-1])
+ax.grid(False)
+leg = ax.legend(loc='center right', frameon=False)
+leg.set_title('Element order')
+plt.savefig('figures/toy_quad_eq.pdf', dpi=800, bbox_inches="tight")
+plt.show()
 
-# # Toy problem convergence study
-# fx = [0.01, 1.5]
-# fishlx = [1, 0.5, 0.25, 0.125, 0.0625]
-# fishly = [2.88E-03, 3.59E-04, 4.49E-05, 5.62E-06, 7.04E-07]
-# fishqx = [1, 0.5, 0.25, 0.125, 0.0625]
-# fishqy = [2.30E-02, 6.39E-03, 1.63E-03, 4.10E-04, 1.02E-04]
+# Toy problem convergence study
+fx = [0.01, 1.5]
+fishlx = [1, 0.5, 0.25, 0.125, 0.0625]
+fishly = [2.30E-02, 6.39E-03, 1.63E-03, 4.10E-04, 1.02E-04]
+fishqx = [1, 0.5, 0.25, 0.125, 0.0625]
+fishqy = [2.88E-03, 3.59E-04, 4.49E-05, 5.62E-06, 7.04E-07]
 
-# def equation(x, y, eqx):
-#     l = len(x) - 1
-#     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
-#     C = 0
-#     for i in range(5):
-#         C += (1/5)*y[i]/(x[i]**p)
-#     print('C = ', C)
-#     print('p = ', p)
-#     eqy = [0, 0]
-#     for i in range(2):
-#         eqy[i] = C * eqx[i] ** p
-#     return eqy
-# f70l = equation(fishlx, fishly, fx)
-# f70q = equation(fishqx, fishqy, fx)
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(5):
+        C += (1/5)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+f70l = equation(fishlx, fishly, fx)
+f70q = equation(fishqx, fishqy, fx)
 
-# fig, ax = plt.subplots()
-# ax.scatter(fishlx, fishly, color='gray', facecolors='none', s=150, marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.38\\cdot10^{-2})h^{1.95}$')
-# ax.scatter(fishqx, fishqy, color='blue', facecolors='none', s=150, marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(2.88\\cdot10^{-3})h^{3.00}$')
-# ax.plot(fx, f70l, linestyle="--", color='gray')
-# ax.plot(fx, f70q, linestyle="--", color='blue')
-# ax.plot()
-# ax.set_xlabel('Element length (m)')
-# ax.set_xscale('log')
-# ax.set_xlim([0.05, 1.5])
-# ax.set_ylabel('L$^{2}$ error')
-# ax.set_yscale('log')
-# ax.set_ylim([1e-7, 5e-2])
-# ax.grid(False)
-# leg = ax.legend(loc='lower right', frameon=False)
-# leg.set_title('Element order')
-# plt.savefig('figures/toy_fish_eq.pdf', dpi=800, bbox_inches="tight")
-# plt.show()
+fig, ax = plt.subplots()
+ax.scatter(fishlx, fishly, color='gray', facecolors='none', s=150, marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.38\\cdot10^{-2})h^{1.95}$')
+ax.scatter(fishqx, fishqy, color='blue', facecolors='none', s=150, marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(2.88\\cdot10^{-3})h^{3.00}$')
+ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.plot(fx, f70q, linestyle="--", color='blue')
+ax.plot()
+ax.set_xlabel('Element length (m)')
+ax.set_xscale('log')
+ax.set_xlim([0.05, 1.5])
+ax.set_ylabel('L$^{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([1e-7, 5e-2])
+ax.grid(False)
+leg = ax.legend(loc='lower right', frameon=False)
+leg.set_title('Element order')
+plt.savefig('figures/toy_fish_eq.pdf', dpi=800, bbox_inches="tight")
+plt.show()
 
-# # Toy problem convergence study
-# fx = [0.01, 1.5]
-# complx = [1, 0.5, 0.25, 0.125, 0.0625]
-# comply = [4.28E-10, 1.85E-11, 2.02E-11, 1.58E-11, 2.46E-11]
-# compqx = [1, 0.5, 0.25, 0.125, 0.0625]
-# compqy = [2.44E-12, 2.96E-12, 8.00E-12, 6.06E-12, 5.46E-12]
-# C2y = [1.19E-12, 2.26E-12, 5.60E-12, 3.05E-12, 6.38E-12]
-# C3y = [4.31E-10, 7.79E-13, 3.32E-12, 2.77E-12, 9.85E-12]
+# Toy problem convergence study
+fx = [0.01, 1.5]
+complx = [1, 0.5, 0.25, 0.125, 0.0625]
+comply = [4.28E-10, 1.85E-11, 2.02E-11, 1.58E-11, 2.46E-11]
+compqx = [1, 0.5, 0.25, 0.125, 0.0625]
+compqy = [2.44E-12, 2.96E-12, 8.00E-12, 6.06E-12, 5.46E-12]
+C2y = [4.31E-10, 7.79E-13, 3.32E-12, 2.77E-12, 9.85E-12]
+C3y = [1.19E-12, 2.26E-12, 5.60E-12, 3.05E-12, 6.38E-12]
 
-# def equation(x, y, eqx):
-#     l = len(x) - 1
-#     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
-#     C = 0
-#     for i in range(5):
-#         C += (1/5)*y[i]/(x[i]**p)
-#     print('C = ', C)
-#     print('p = ', p)
-#     eqy = [0, 0]
-#     for i in range(2):
-#         eqy[i] = C * eqx[i] ** p
-#     return eqy
-# f70l = equation(complx, comply, fx)
-# f70q = equation(compqx, compqy, fx)
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(5):
+        C += (1/5)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+f70l = equation(complx, comply, fx)
+f70q = equation(compqx, compqy, fx)
 
-# fig, ax = plt.subplots()
-# ax.scatter(complx, C2y, color='black', facecolors='none', marker='o', s=150, label='$||e||_{L^{2}}$ against analytical solution')
-# ax.scatter(complx, C3y, color='black', facecolors='none', marker='d', s=150)
-# ax.scatter(complx, comply, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.23\\cdot10^{-10})h^{1.03}$')
-# ax.scatter(compqx, compqy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(3.19\\cdot10^{-12})h^{-0.29}$')
-# ax.plot(fx, f70l, linestyle="--", color='gray')
-# ax.plot(fx, f70q, linestyle="--", color='blue')
-# ax.plot()
-# ax.set_xlabel('Element length (m)')
-# ax.set_xscale('log')
-# ax.set_xlim([0.05, 1.5])
-# ax.set_ylabel('L$^{2}$ error')
-# ax.set_yscale('log')
-# ax.set_ylim([1e-16, 5e-9])
-# ax.grid(False)
-# leg = ax.legend(loc='lower left', frameon=False)
-# leg.set_title('Element order')
-# plt.savefig('figures/toy_flat.pdf', dpi=800, bbox_inches="tight")
-# plt.show()
+fig, ax = plt.subplots()
+ax.scatter(complx, C2y, color='black', facecolors='none', marker='o', s=150, label='$||e||_{L^{2}}$ against analytical solution')
+ax.scatter(complx, C3y, color='black', facecolors='none', marker='d', s=150)
+ax.scatter(complx, comply, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.23\\cdot10^{-10})h^{1.03}$')
+ax.scatter(compqx, compqy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(3.19\\cdot10^{-12})h^{-0.29}$')
+ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.plot(fx, f70q, linestyle="--", color='blue')
+ax.plot()
+ax.set_xlabel('Element length (m)')
+ax.set_xscale('log')
+ax.set_xlim([0.05, 1.5])
+ax.set_ylabel('L$^{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([1e-16, 5e-9])
+ax.grid(False)
+leg = ax.legend(loc='lower left', frameon=False)
+leg.set_title('Element order')
+plt.savefig('figures/toy_flat.pdf', dpi=800, bbox_inches="tight")
+plt.show()
 
-# # Toy problem convergence study
-# fx = [0.01, 1.5]
-# quadlx = [1, 0.5, 0.25, 0.125, 0.0625]
-# quadly = [1.34E-12, 1.96E-12, 7.00E-13, 2.52E-13, 3.05E-12]
-# quadqx = [1, 0.5, 0.25, 0.125, 0.0625]
-# quadqy = [4.17E-02, 1.04E-02, 2.60E-03, 6.51E-04, 1.63E-04]
-# C2y = [3.48E-12, 4.76E-12, 3.48E-12, 3.62E-12, 2.97E-12]
-# C3y = [4.56E-02, 1.14E-02, 2.85E-03, 7.12E-04, 1.77E-04]
+# Toy problem convergence study
+fx = [0.01, 1.5]
+quadlx = [1, 0.5, 0.25, 0.125, 0.0625]
+quadly = [4.17E-02, 1.04E-02, 2.60E-03, 6.51E-04, 1.63E-04]
+quadqx = [1, 0.5, 0.25, 0.125, 0.0625]
+quadqy = [1.34E-12, 1.96E-12, 7.00E-13, 2.52E-13, 3.05E-12]
+C2y = [4.56E-02, 1.14E-02, 2.85E-03, 7.12E-04, 1.77E-04]
+C3y = [3.48E-12, 4.76E-12, 3.48E-12, 3.62E-12, 2.97E-12]
 
-# def equation(x, y, eqx):
-#     l = len(x) - 1
-#     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
-#     C = 0
-#     for i in range(5):
-#         C += (1/5)*y[i]/(x[i]**p)
-#     print('C = ', C)
-#     print('p = ', p)
-#     eqy = [0, 0]
-#     for i in range(2):
-#         eqy[i] = C * eqx[i] ** p
-#     return eqy
-# f70l = equation(quadlx, quadly, fx)
-# f70q = equation(quadqx, quadqy, fx)
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(5):
+        C += (1/5)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+f70l = equation(quadlx, quadly, fx)
+f70q = equation(quadqx, quadqy, fx)
 
-# fig, ax = plt.subplots()
-# ax.scatter(quadlx, C2y, color='black', facecolors='none', marker='o', s=150, label='$||e||_{L^{2}}$ against analytical solution')
-# ax.scatter(quadlx, C3y, color='black', facecolors='none', marker='d', s=150)
-# ax.scatter(quadlx, quadly, color='gray', marker='o', label='Linear 2D: $||e||_{L^{2}}=(4.16\\cdot10^{-2})h^{2.00}$')
-# ax.scatter(quadqx, quadqy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L^{2}}=(9.75\\cdot10^{-13})h^{-0.30}$')
-# ax.plot(fx, f70l, linestyle="--", color='gray')
-# ax.plot(fx, f70q, linestyle="--", color='blue')
-# ax.plot()
-# ax.set_xlabel('Element length (m)')
-# ax.set_xscale('log')
-# ax.set_xlim([0.05, 1.5])
-# ax.set_ylabel('L$^{2}$ error')
-# ax.set_yscale('log')
-# ax.set_ylim([5e-14, 1e-1])
-# ax.grid(False)
-# leg = ax.legend(loc='center right', frameon=False)
-# leg.set_title('Element order')
-# plt.savefig('figures/toy_quad.pdf', dpi=800, bbox_inches="tight")
-# plt.show()
+fig, ax = plt.subplots()
+ax.scatter(quadlx, C2y, color='black', facecolors='none', marker='o', s=150, label='$||e||_{L^{2}}$ against analytical solution')
+ax.scatter(quadlx, C3y, color='black', facecolors='none', marker='d', s=150)
+ax.scatter(quadlx, quadly, color='gray', marker='o', label='Linear 2D: $||e||_{L^{2}}=(4.16\\cdot10^{-2})h^{2.00}$')
+ax.scatter(quadqx, quadqy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L^{2}}=(9.75\\cdot10^{-13})h^{-0.30}$')
+ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.plot(fx, f70q, linestyle="--", color='blue')
+ax.plot()
+ax.set_xlabel('Element length (m)')
+ax.set_xscale('log')
+ax.set_xlim([0.05, 1.5])
+ax.set_ylabel('L$^{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([5e-14, 1e-1])
+ax.grid(False)
+leg = ax.legend(loc='center right', frameon=False)
+leg.set_title('Element order')
+plt.savefig('figures/toy_quad.pdf', dpi=800, bbox_inches="tight")
+plt.show()
 
-# # Toy problem convergence study
-# fx = [0.01, 1.5]
-# fishlx = [1, 0.5, 0.25, 0.125, 0.0625]
-# fishly = [2.41E-03, 3.01E-04, 3.76E-05, 4.70E-06, 5.87E-07]
-# fishqx = [1, 0.5, 0.25, 0.125, 0.0625]
-# fishqy = [2.12E-02, 5.84E-03, 1.49E-03, 3.75E-04, 9.39E-05]
-# C2y = [2.88E-03, 3.59E-04, 4.49E-05, 5.62E-06, 7.04E-07]
-# C3y = [2.30E-02, 6.39E-03, 1.63E-03, 4.10E-04, 1.02E-04]
+# Toy problem convergence study
+fx = [0.01, 1.5]
+fishlx = [1, 0.5, 0.25, 0.125, 0.0625]
+fishly = [2.12E-02, 5.84E-03, 1.49E-03, 3.75E-04, 9.39E-05]
+fishqx = [1, 0.5, 0.25, 0.125, 0.0625]
+fishqy = [2.41E-03, 3.01E-04, 3.76E-05, 4.70E-06, 5.87E-07]
+C2y = [2.30E-02, 6.39E-03, 1.63E-03, 4.10E-04, 1.02E-04]
+C3y = [2.88E-03, 3.59E-04, 4.49E-05, 5.62E-06, 7.04E-07]
 
-# def equation(x, y, eqx):
-#     l = len(x) - 1
-#     p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
-#     C = 0
-#     for i in range(5):
-#         C += (1/5)*y[i]/(x[i]**p)
-#     print('C = ', C)
-#     print('p = ', p)
-#     eqy = [0, 0]
-#     for i in range(2):
-#         eqy[i] = C * eqx[i] ** p
-#     return eqy
-# f70l = equation(fishlx, fishly, fx)
-# f70q = equation(fishqx, fishqy, fx)
+def equation(x, y, eqx):
+    l = len(x) - 1
+    p = np.log10(y[l]/y[0])/np.log10(x[l]/x[0])
+    C = 0
+    for i in range(5):
+        C += (1/5)*y[i]/(x[i]**p)
+    print('C = ', C)
+    print('p = ', p)
+    eqy = [0, 0]
+    for i in range(2):
+        eqy[i] = C * eqx[i] ** p
+    return eqy
+f70l = equation(fishlx, fishly, fx)
+f70q = equation(fishqx, fishqy, fx)
 
-# fig, ax = plt.subplots()
-# ax.scatter(fishlx, C2y, color='black', facecolors='none', marker='o', s=150, label='$||e||_{L^{2}}$ against analytical solution')
-# ax.scatter(fishlx, C3y, color='black', facecolors='none', marker='d', s=150)
-# ax.scatter(fishlx, fishly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.19\\cdot10^{-2})h^{1.95}$')
-# ax.scatter(fishqx, fishqy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(2.41\\cdot10^{-3})h^{3.00}$')
-# ax.plot(fx, f70l, linestyle="--", color='gray')
-# ax.plot(fx, f70q, linestyle="--", color='blue')
-# ax.plot()
-# ax.set_xlabel('Element length (m)')
-# ax.set_xscale('log')
-# ax.set_xlim([0.05, 1.5])
-# ax.set_ylabel('L$^{2}$ error')
-# ax.set_yscale('log')
-# ax.set_ylim([1e-7, 5e-2])
-# ax.grid(False)
-# leg = ax.legend(loc='lower right', frameon=False)
-# leg.set_title('Element order')
-# plt.savefig('figures/toy_fish.pdf', dpi=800, bbox_inches="tight")
-# plt.show()
+fig, ax = plt.subplots()
+ax.scatter(fishlx, C2y, color='black', facecolors='none', marker='o', s=150, label='$||e||_{L^{2}}$ against analytical solution')
+ax.scatter(fishlx, C3y, color='black', facecolors='none', marker='d', s=150)
+ax.scatter(fishlx, fishly, color='gray', marker='o', label='Linear 2D: $||e||_{L_{2}}=(2.19\\cdot10^{-2})h^{1.95}$')
+ax.scatter(fishqx, fishqy, color='blue', marker='d', label='Qadratic 2D: $||e||_{L_{2}}=(2.41\\cdot10^{-3})h^{3.00}$')
+ax.plot(fx, f70l, linestyle="--", color='gray')
+ax.plot(fx, f70q, linestyle="--", color='blue')
+ax.plot()
+ax.set_xlabel('Element length (m)')
+ax.set_xscale('log')
+ax.set_xlim([0.05, 1.5])
+ax.set_ylabel('L$^{2}$ error')
+ax.set_yscale('log')
+ax.set_ylim([1e-7, 5e-2])
+ax.grid(False)
+leg = ax.legend(loc='lower right', frameon=False)
+leg.set_title('Element order')
+plt.savefig('figures/toy_fish.pdf', dpi=800, bbox_inches="tight")
+plt.show()
 
 # # Convergence study with non-uniform stress
 # fx = [0.01, 1.5]
