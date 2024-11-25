@@ -1,0 +1,55 @@
+reset
+
+create cylinder height 2 radius 2
+rotate volume 1 angle 90 about x
+volume 1 move 0 -1 0
+webcut volume 1 with plane zplane
+delete volume 2
+webcut volume 1 with plane zplane rotate -60 about y
+delete volume 1
+webcut volume 3 with plane yplane offset -1.2
+webcut volume all with cylinder radius 1.2 axis y
+merge volume all
+volume all size 0.9#0.3
+volume 6 size 0.28#0.21#0.07
+mesh volume all
+
+block 1 volume 6 4 5 3
+block 1 element type hex27
+
+create pyramid height 1.003618893150114627 sides 3 radius 4.358035829057745 top 0
+rotate volume 7 angle 90 about x 
+move volume 7 x 0 y -0.003618893150114627 z 0
+move volume 7 x 0 y 0.5 z 0
+tweak curve 78 79 80 fillet radius 0.13826
+webcut body 7 with plane zplane rotate 120 about y center 0 0 0  
+webcut body 7 with plane zplane
+delete volume 8 9
+create cylinder height 1 radius 2
+rotate volume 10 angle 90 about x
+move volume 10 x 0 y 0.5 z 0
+move volume 7 x 0 y -0.00853189048753 z 0
+webcut body 7 tool volume 10
+delete volume 7 10
+split curve 134 fraction 0.8
+webcut volume 11 plane vertex 77 45 78
+merge volume 11 12
+volume 12 scheme sweep source surface 92 72 target surface 99
+volume 11 scheme sweep source surface 91 target surface 95
+volume 11 12 size 0.6#0.2
+mesh volume 11 12
+
+sideset 1 surface 38 31 # Substrate bottom
+sideset 2 surface 46 44 32 39 # Substrate z=0 0˚
+sideset 3 surface 48 42 34 36 # Substrate 60˚
+sideset 4 surface 49 41 # Substrate top
+sideset 5 surface 91 92 72  # Indenter bottom
+sideset 6 surface 100 94 # Indenter z=0 0˚
+sideset 7 surface 88 # Indenter 60˚
+sideset 8 surface 99 95 # Indenter top
+
+#move volume 7 x 0 y -1 z 0
+create block 2
+block 2 add volume 11 12
+block 2 element type hex27
+export genesis "~/GitHub/NN_indentation/moose/mesh/3D_c0.e" dimension 3 overwrite
