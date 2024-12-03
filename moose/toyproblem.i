@@ -1,15 +1,17 @@
 name = '1'
-E = 200
-nu = 0.3
-# b = 100
-tb = 100
+E = 200e9
+nu = 0#.3
+b = 100#e9
+tb = 100#e9
 A = 1
 ref = 0
 
 [Mesh]
   [mesh]
     type = FileMeshGenerator
-    file = ../outputs/toyproblem/toy_mesh_l0.e
+    # file = mesh/toy_mesh_l0tri.e
+    file = mesh/toy_mesh_l0.e
+    # file = mesh/toy_mesh_q0.e
   []
   [refine]
     type = RefineBlockGenerator
@@ -68,21 +70,21 @@ ref = 0
 []
 
 [Functions]
-  # [body_force]
-  #   type = ParsedFunction
-  #   # Constant body load
-  #   # value = '${b}*t'
-  #   # Varied body load
-  #   value = '${b}*y*t'
-  # []
+  [body_force]
+    type = ParsedFunction
+    # Constant body load
+    # value = '${b}*t'
+    # Varied body load
+    value = '${b}*y*t'
+  []
   [exact] # For use in calculating the exact solution for the toy problem
     type = ParsedFunction
     # Compression test
-    expression = '(1-${nu}^2)/(${A}*${E})*-y*${tb}'
+    # expression = '(1-${nu}^2)/(${A}*${E})*-y*${tb}'
     # Constant body load
     # expression = '(1/(${E}*${A}))*((-((y)^2)*${b}/2))'
     # Linearly varying load
-    # expression = '(1/(${E}*${A}))*((-((y)^3)*${b}/6)-(y*${tb}/2))'
+    expression = '(1/(${E}*${A}))*((-((y)^3)*${b}/6)-(y*${tb}/2))'
   []
 []
 
@@ -91,13 +93,13 @@ ref = 0
     displacements = 'disp_x disp_y'
     use_displaced_mesh = true
   []
-  # [BodyForce]
-  #   type = ADBodyForce
-  #   variable = disp_y
-  #   block = 1
-  #   function = body_force
-  #   use_displaced_mesh = true
-  # []
+  [BodyForce]
+    type = ADBodyForce
+    variable = disp_y
+    block = 1
+    function = body_force
+    use_displaced_mesh = true
+  []
 []
 
 [BCs]

@@ -25,8 +25,9 @@ surface 1 size 1
 create block 1
 block 1 add surface 1
 
+# surface 1 scheme trimesh
 mesh surface 1 smooth
-block 1 element type quad8
+block 1 element type quad4
 
 sideset 1 label 1 # left
 sideset 2 label 2 # top
@@ -34,4 +35,4 @@ sideset 3 label 3 # right
 sideset 4 label 4 # bottom
 nodeset 5 label 5 # corner
 
-export genesis "~/GitHub/NN_indentation/moose/toy_mesh_q0.e" dimension 3 overwrite
+export genesis "~/GitHub/NN_indentation/moose/mesh/toy_mesh_l0.e" dimension 3 overwrite

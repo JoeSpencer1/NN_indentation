@@ -5,7 +5,7 @@ hm = 0.226 #0.226
 nu = 0.25
 K = ${fparse sy / (sy/E)^n} # K calculated from sy/E and n
 
-fname = ../mesh/3D_r0.e
+fname = mesh/3D_r0.e
 suffix = ''
 
 # substrate refinement
